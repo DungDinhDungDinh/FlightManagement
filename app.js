@@ -109,6 +109,30 @@ app.get('/api/dest_airports', function(req,res){
 	});
 });
 
+//API Lay thong tin san bay di
+app.get('/detailarr_airports/:ma', function(req,res){
+	var ma = req.params.ma;
+	var arr= [];
+
+	Flight.findOne({_noiDi: ma}).select('_noiDen -_id').exec(function(err,arrs){
+		arr= arrs;
+		console.log('arr',arr._noiDen);
+
+		Airport.find({_ma: arr._noiDen}).select('_nhomSanBay _diaDanh -_id').exec(function(err,arrs){
+			if(err){
+				res.status(400).send({'error':'Bad request (The data is invalid)'});
+				return console.log(err);
+			}
+			else
+			{
+				res.status(200).send(arrs);
+				console.log(arrs);
+			}
+		});
+	});
+});
+
+
 //API4 Tim chuyen bay thoa yeu cau
 //Chua xu ly duoc so ghe
 //'/flights/:maNoiDi/:maNoiDen/:ngayDi/:soNguoi'
