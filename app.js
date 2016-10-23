@@ -38,24 +38,6 @@ var Airport = require('./models/airport');
 // 	}
 // });
 
-//----CODE THEM DAT CHO----
-// var b = new Booking({
-// 	_maDatCho:'ABCXYZ',
-// 	_maChuyenBay:'BL327',
-// 	_ngayDatCho: '22-10-2016'
-// 	_soGheThuong: 2,
-// 	_soGheThuongGia: 0,
-// });
-
-// b.save(function(err, b) {
-// 	if (err) {
-
-// 	} else {
-// 		Booking.find(function(err, bookings) {
-// 			console.log(bookings);
-// 		});
-// 	}
-// });
 
 //API Lấy danh sách chuyến bay
 app.get('/flights',function(req,res){
@@ -161,6 +143,101 @@ app.get('/passengers', function(req,res){
 	  	res.status(200).send(passengers);
 	  	console.log(passengers);
 	  }
+	});
+});
+
+//API8 Them hanh khach
+app.get('/passengers/:_maDatCho/:_danhXung/:_ho/:_ten', function(req,res){
+	var maDatCho = req.params._maDatCho;
+	var danhXung = req.params._danhXung;
+	var ho =req.params._ho;
+	var ten = req.params._ten;
+
+	var p = new Passenger({
+		_maDatCho: maDatCho,
+		_danhXung: danhXung,
+		_ho: ho,
+		_ten: ten
+	});
+
+	p.save(function(err, p) {
+		if (err) {
+			res.status(400).send({'error':'Bad request (The data is invalid)'});
+	  		return console.error(err);
+		} else {
+			Passenger.find(function(err, passengers) {
+				console.log(passengers);
+				res.status(201).send({'messege':'Created'});
+			});
+		}
+	});
+
+});
+
+//API9 Tao dat cho 
+app.get('/bookings/:_maDatCho/:_thoiGianDatCho/:_tongTien', function(req,res){
+	var maDatCho = req.params._maDatCho;
+	var thoiGian = req.params._thoiGianDatCho;
+	var tongTien = Number(req.params._tongTien);
+
+	var b = new Booking({
+		_maDatCho: maDatCho,
+		_thoiGianDatCho: thoiGian,
+		_tongTien: tongTien,
+		_trangThai: 1
+	});
+
+	b.save(function(err, b) {
+		if (err) {
+			res.status(400).send({'error':'Bad request (The data is invalid)'});
+	  		return console.error(err);
+		} else {
+			Passenger.find(function(err, bookings) {
+				console.log(bookings);
+				res.status(201).send({'messege':'Created'});
+			});
+		}
+	});
+});
+
+//API10 Thong tin dat cho
+app.get('/bookings/:_ma', function(req,res){
+	var maDatCho = req.params._ma;
+
+	Booking.find({_maDatCho: maDatCho}).select('_maDatCho _thoiGianDatCho _tongTien _trangThai -_id').exec(function(err, bookings){
+	  if (err) 
+	  	return console.error(err);
+	  else
+	  {
+	  	res.status(200).send(bookings);
+	  	console.log(bookings);
+	  }
+	});
+});
+
+//API11 Them chi tiet chuyen bay
+app.get('/flight-details/:_maDatCho/:_maChuyenBay/:_ngay/:_hang', function(req,res){
+	var maDatCho = req.params._maDatCho;
+	var maChuyenBay = req.params._maChuyenBay;
+	var ngay = req.params._ngay;
+	var hang = req.params._hang;
+
+	var fb = new FlightDetail({
+		_maDatCho: maDatCho,
+		_maChuyenBay: maChuyenBay,
+		_ngay: ngay,
+		_hang: hang
+	});
+
+	fb.save(function(err, fd) {
+		if (err) {
+			res.status(400).send({'error':'Bad request (The data is invalid)'});
+	  		return console.error(err);
+		} else {
+			Passenger.find(function(err, fbs) {
+				res.status(201).send({'messege':'Created'});
+			});
+		}
 	});
 });
 

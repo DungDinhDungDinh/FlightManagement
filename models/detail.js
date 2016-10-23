@@ -16,10 +16,6 @@ var flightDetailSchema = mongoose.Schema({
 	},
 	_hang:{
 		type:String,
-	},
-	_mucGia:{
-		type: String,
-		required: true
 	}
 });
 
