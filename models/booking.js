@@ -7,7 +7,7 @@ var bookingSchema = mongoose.Schema({
 		required: true
 	},
 	_thoiGianDatCho:{
-		type:String,
+		type:Number,
 	},
 	_tongTien:{
 		type:Number,

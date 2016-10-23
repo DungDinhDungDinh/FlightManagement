@@ -1,6 +1,61 @@
 angular.module('flightManagementApp', [])
     .controller('FlightManagementController', function($scope, $http) {
-    $scope._maChuyenBay = 'SGN',
+    $scope.sanBayDi = [];
+    $scope.sanBayDen = [];
+
+    var laySanBayDi = function() {
+         $http({
+                method: 'GET',
+                url: '/api/start_airports/',
+            }).then(function successCallback(response) {
+                airports = response.data;
+                for (var i = 0; i < airports.length; i++) {
+                    console.log(airports[i]._noiDi);
+                    $http({
+                        method: 'GET',
+                        url : '/api/airports/' + airports[i]._noiDi
+                    }).then(function success(res) {
+                        $scope.sanBayDi.push(res.data);
+                        console.log(res.data);
+                    })
+                }
+            }, function errorCallback(response) {
+                console.log('laySanBayDi failed');
+
+            });
+
+            console.log($scope.sanBayDi);
+    };
+
+    var laySanBayDen = function(noiDi) {
+         $http({
+                method: 'GET',
+                url: '/api/dest_airports/',
+                params : {id : noiDi}
+            }).then(function successCallback(response) {
+                console.log('success');
+                console.log(response.data);
+                airports = response.data;
+                for (var i = 0; i < airports.length; i++) {
+                    console.log(airports[i]._noiDen);
+                    $http({
+                        method: 'GET',
+                        url : '/api/airports/' + airports[i]._noiDen
+                    }).then(function success(res) {
+                        $scope.sanBayDen.push(res.data);
+                        console.log(res.data);
+                    })
+                }
+            }, function errorCallback(response) {
+                console.log('failed');
+
+            });
+
+            console.log($scope.sanBayDen);
+    };
+
+    laySanBayDen('SGN');
+
 
     $scope.init = function (){
         //Ham lay danh sach cac chuyen bay -> $scope.flights
@@ -26,5 +81,7 @@ angular.module('flightManagementApp', [])
             });
     };
 
-    $scope.init();
+    // $scope.init();
+
+    
     });

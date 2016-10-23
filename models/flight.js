@@ -15,11 +15,12 @@ var flightSchema = mongoose.Schema({
 		required: true
 	},
 	_ngayDi:{
-		type:String,
+		type:Number,
 		required:true
 	},
-	_gioDi:{
-		type:String
+	_hang:{
+		type:String,
+		required:true
 	},
 	_soGhe:{
 		type: Number

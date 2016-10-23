@@ -13,6 +13,12 @@ var passengerSchema = mongoose.Schema({
 	},
 	_ten:{
 		type:String,
+	},
+	_dienThoai:{
+		type:String
+	},
+	_quocTich:{
+		type:String
 	}
 });
 

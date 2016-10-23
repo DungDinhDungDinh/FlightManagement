@@ -14,9 +14,6 @@ var airPortSchema = mongoose.Schema({
 	_diaDanh:{
 		type:String,
 		required: true
-	},
-	_tenSanBay:{
-		type:String
 	}
 });
 

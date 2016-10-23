@@ -1,9 +1,10 @@
 {
-  "name": "test",
+  "name": "FlightManagement",
   "version": "1.0.0",
-  "description": "test mongodb",
+  "description": "DAGK - FlightManagement",
   "main": "app.js",
   "scripts": {
+    "start" : "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies":{
@@ -11,6 +12,6 @@
   	"body-parser":"*",
   	"mongoose":"*"
   },
-  "author": "Dung Dinh",
-  "license": "ISC"
+  "author": "Chung Nguyen - Danh Dang - Dung Dinh",
+  "license": "MIT"
 }
