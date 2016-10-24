@@ -23,15 +23,16 @@ angular.module('flightManagementApp', [])
                 console.log('laySanBayDi failed');
 
             });
-
             console.log($scope.sanBayDi);
     };
+
+    laySanBayDi();
 
     var laySanBayDen = function(noiDi) {
          $http({
                 method: 'GET',
                 url: '/api/dest_airports/',
-                params : {id : noiDi}
+                params : {ma : noiDi}
             }).then(function successCallback(response) {
                 console.log('success');
                 console.log(response.data);
@@ -50,11 +51,9 @@ angular.module('flightManagementApp', [])
                 console.log('failed');
 
             });
-
-            console.log($scope.sanBayDen);
     };
 
-    laySanBayDen('SGN');
+    
 
 
     $scope.init = function (){

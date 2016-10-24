@@ -7,7 +7,9 @@ app.use(express.static('client'));
 
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://dungdinh:tthuyddung218@ds053136.mlab.com:53136/flight_management');
+//mongoose.connect('mongodb://dungdinh:tthuyddung218@ds053136.mlab.com:53136/flight_management');
+
+mongoose.connect('mongodb://localhost/FlightManagement');
 
 
 var Flight = require('./models/flight');
@@ -66,22 +68,21 @@ Flight.find({_mucGia: 'Y'},function (err, flights) {
 });
 
 // API1 lấy danh sách mã nơi đi
-app.get('/des_airports',function(req,res){
+app.get('/api/start_airports',function(req,res){
 	Flight.find({}).select('_noiDi -_id').exec(function(err, flights){
 	  if (err) 
 	  	return console.error(err);
 	  else
 	  {
 	  	res.status(200).send(flights);
-	  	//console.log(flights);
 	  }
 	});
 });
 
 //API2 lay thong tin san bay
-app.get('/airports/:ma', function(req,res){
+app.get('/api/airports/:ma', function(req,res){
 	var ma = req.params.ma;
-	Airport.find({_ma: ma}).select('_nhomSanBay _diaDanh -_id').exec(function(err,infos){
+	Airport.find({_ma: ma}).select('-_id').exec(function(err,infos){
 		if(err)
 			return console.log(err);
 		else
@@ -94,17 +95,15 @@ app.get('/airports/:ma', function(req,res){
 
 
 //API3 lấy danh sách nơi đến ứng với nơi đi
-app.get('/arr_airports/:ma', function(req,res){
-	var ma = req.params.ma;
+app.get('/api/dest_airports', function(req,res){
+	var ma = req.query.ma;
 	Flight.find({_noiDi: ma}).select('_noiDen -_id').exec(function(err,arrs){
 		if(err){
 			res.status(400).send({'error':'Bad request (The data is invalid)'});
-			return console.log(err);
 		}
 		else
 		{
 			res.status(200).send(arrs);
-			console.log(arrs);
 		}
 	});
 });
@@ -133,7 +132,7 @@ app.get('/detailarr_airports/:ma', function(req,res){
 
 //API4 Tim chuyen bay thoa yeu cau
 //Chua xu ly duoc so ghe
-app.get('/flights/:maNoiDi/:maNoiDen/:ngayDi/:soNguoi', function(req,res){
+app.get('/flights', function(req,res){
 	var maNoiDi = req.params.maNoiDi;
 	var maNoiDen = req.params.maNoiDen;
 	var ngayDi = req.params.ngayDi;
