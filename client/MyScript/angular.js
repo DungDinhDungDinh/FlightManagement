@@ -103,13 +103,14 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
 
 	 $scope.sanBayDi = [];
     $scope.sanBayDen = [];
+    $scope.flights = [];
 
     var laySanBayDi = function() {
          $http({
                 method: 'GET',
                 url: '/api/start_airports',
             }).then(function successCallback(response) {
-                airports = response.data;
+                var airports = response.data;
                 for (var i = 0; i < airports.length; i++) {
                     console.log(airports[i]._noiDi);
                     $http({
@@ -124,7 +125,6 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
                 console.log('laySanBayDi failed');
 
             });
-            console.log($scope.sanBayDi);
     };
 
    var laySanBayDen = function(noiDi) {
@@ -133,9 +133,9 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
                 url: '/api/dest_airports',
                 params : {ma : noiDi}
             }).then(function successCallback(response) {
-                console.log('success');
+                console.log('laySanBayDen success');
                 console.log(response.data);
-                airports = response.data;
+                var airports = response.data;
                 for (var i = 0; i < airports.length; i++) {
                     console.log(airports[i]._noiDen);
                     $http({
@@ -147,11 +147,58 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
                     })
                 }
             }, function errorCallback(response) {
-                console.log('failed');
-
+                console.log('laySanBayDen failed');
             });
-            console.log($scope.sanBayDen);
     };
+
+    var timChuyenBay = function(noiDi, noiDen, ngayDi, soNguoi) {
+    	$http({
+                method: 'POST',
+                url: '/api/flights',
+                body : {
+                	'noiDi' : noiDi,
+                	'noiDen' : noiDen,
+                	'ngayDi' : ngayDi,
+                	'soNguoi' : soNguoi
+                }
+            }).then(function successCallback(response) {
+                console.log('timChuyenBay success');
+                console.log(response.data);
+                $scope.flights = response.data;
+                
+            }, function errorCallback(response) {
+                console.log('timChuyeBay failed');
+            });
+    }
+
+    var themHanhKhach = function(maDatCho, danhXung, ho, ten, dienThoai, quocTich) {
+    	$http({
+                method: 'POST',
+                url: '/api/passengers',
+                body : {
+                	'maDatCho' : maDatCho,
+                	'danhXung' : danhXung,
+                	'ho' : ho,
+                	'ten' : ten,
+                	'dienThoai' : dienThoai,
+                	'quocTich' : quocTich
+                }
+            }).then(function successCallback(response) {
+                console.log('success');
+                console.log(response.data);
+                
+            }, function errorCallback(response) {
+                console.log('failed');
+            });
+    }
+
+
+   
+    laySanBayDi();
+    var sbdi = 'SGN';
+    laySanBayDen(sbdi);
+    timChuyenBay('SGN', 'BMT', '24-10-2016', 4);
+
 
 	
 });
