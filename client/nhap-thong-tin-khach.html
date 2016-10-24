@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<link href="MyScript/MyCss.css" rel="stylesheet" type="text/css" />
+<script src="MyScript/angular.min.js"></script>
+<script src="MyScript/angular.js"></script>
+</head>
+
+<body>
+<div ng-app="myApp">
+	<div class="main" ng-controller="myCtrl">
+		<div style="background-color:#F3F3F3">
+            <div class="head-tab">
+                    <a class="mua-ve" href="index.html">
+                        <div class="tab-chosen">Mua vé trực tuyến</div>
+                    </a>
+                    
+                    <a class="mua-ve" href="thong-tin-chuyen-bay-1.html">
+                        <div class="tab">Thông tin chuyến bay</div>
+                    </a>
+            </div>
+                  
+            <div class="tim-chuyen-bay-tab">
+                <div class="tab2 number1"> Tìm chuyến bay</div>
+                <div class="tab2 number2"> Lựa chọn chuyến bay</div>
+                <div class="tab2-chosen number3"> Thông tin hành khách</div>
+            </div>
+         	<hr>
+        </div>
+        
+        <div class="center-tab">     
+            <div class="tab-1">
+            	<p class="text"> Danh xưng: </p>
+                <select class="input-normal input-gioi-tinh" ng-model="selectedDX" ng-options="item for item in danh_xung" ng-change="checkNumber1(selectedDX)">
+            	</select>  
+                
+            	<p class="text clear"> Họ: </p>
+                <input class="input-normal" placeholder="Last Name"/>
+                
+                <p class="text"> Tên: </p>
+                <input class="input-normal" placeholder="First Name"/>
+                
+                <p class="text clear"> Số điện thoại: </p>
+                <input class="input-normal" placeholder="Phone number" />              
+                
+                <p class="text"> Quốc gia: </p>
+                <input class="input-normal" placeholder="Nation"/> 
+                  
+            </div>
+
+            <div class="tab-1">
+            	<button type="button" class="btn-tim-kiem">Hoàn tất</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
