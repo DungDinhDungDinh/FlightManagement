@@ -155,9 +155,9 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
     	$http({
                 method: 'POST',
                 url: '/api/flights',
-                body : {
-                	'noiDi' : noiDi,
-                	'noiDen' : noiDen,
+                data : {
+                	'maNoiDi' : noiDi,
+                	'maNoiDen' : noiDen,
                 	'ngayDi' : ngayDi,
                 	'soNguoi' : soNguoi
                 }
@@ -175,7 +175,7 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
     	$http({
                 method: 'POST',
                 url: '/api/passengers',
-                body : {
+                data : {
                 	'maDatCho' : maDatCho,
                 	'danhXung' : danhXung,
                 	'ho' : ho,
@@ -197,7 +197,8 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
     laySanBayDi();
     var sbdi = 'SGN';
     laySanBayDen(sbdi);
-    timChuyenBay('SGN', 'BMT', '24-10-2016', 4);
+    timChuyenBay('SGN', 'BMT', '22-10-2016', 4);
+    console.log($scope.flights);
 
 
 	

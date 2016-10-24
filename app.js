@@ -19,6 +19,8 @@ var Passenger = require('./models/passenger');
 var Airport = require('./models/airport');
 
 //----CODE THEM CHUYEN BAY MOI----
+
+
 // var f = new Flight({
 // 	_ma:'BL327',
 // 	_noiDi:'SGN',
@@ -303,7 +305,27 @@ app.get('/api/passengers',function(req,res){
 
 
 
+app.post('/api/flights', function(req,res){
+	var requestType = req.body.requestType;
+	var maNoiDi = req.body.maNoiDi;
+	var maNoiDen = req.body.maNoiDen;
+	var ngayDi = req.body.ngayDi;
+	var soNguoi = req.body.soNguoi;
 
+
+
+	Flight.find({_noiDi: maNoiDi, _noiDen: maNoiDen, _ngayDi: ngayDi, "$where": "this._soGhe >= " + soNguoi}).select('-_id').exec(function(err,flights){
+	  if (err) {
+	  	res.status(400).send({'error':'Bad request (The data is invalid)'});
+	  	return console.error(err);
+	  }
+	  else
+	  {
+	  	res.status(200).send(flights);
+	  	console.log(flights);
+	  }
+	});
+});
 
 //Test 
 app.get('/',function(req,res){
@@ -311,3 +333,4 @@ app.get('/',function(req,res){
 });
 
 app.listen(process.env.PORT || 3000);
+

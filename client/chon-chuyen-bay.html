@@ -4,9 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
 <link href="MyScript/MyCss.css" rel="stylesheet" type="text/css" />
+<script src="MyScript/angular.min.js"></script>
+<script src="MyScript/angular.js"></script>
 </head>
 
-<body>
+<body ng-app="myApp">
 	<div class="main" >
 		<div style="background-color:#F3F3F3">
             <div class="head-tab">
@@ -27,8 +29,12 @@
          	<hr>
         </div>
         
-        <div class="center-tab">
-			<p>	Đổ dữ liệu ở đây </p>
+        <div class="center-tab" ng-controller="myCtrl"> 
+            <div ng-repeat="flight in flights">
+			<p> {{flight._ma}} |  {{flight._noiDi}} | 
+             {{flight._noiDen}} | {{flight._ngayDi}} |  {{flight._hang}} | {{flight._soGhe}} |  {{flight._giaVe}} | </p> <button> Đặt vé</button>
+             
+             </div>
             
             <div class="tab-1">
                 <a href="nhap-thong-tin-khach.html">
