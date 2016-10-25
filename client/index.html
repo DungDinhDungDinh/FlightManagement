@@ -4,6 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Flight Management</title>
+
 <link rel="shortcut icon" href="image/FlightTrack-icon.png" type="image/png"/>
 <link href="MyScript/MyCss.css" rel="stylesheet" type="text/css" />
 <script src="MyScript/angular.min.js"></script>
@@ -78,16 +79,18 @@
                     
             <div class="tab-1">
             	<p class="text"> Khởi hành: </p>
-                <input class="input-from" placeholder="Từ" />
+                <select class="input-from" ng-init="laySanBayDi()" ng-model="selectedNoidi" ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDi " ng-change="chonNoiDi(selectedNoidi)">
+            	</select> 
                 <p class="text"> Kết thúc: </p>
-                <input class="input-from" placeholder="Đến" /> 	
+                <select class="input-from" ng-model="selectedNoiden" ng-options="item for item in sanBayDen " ng-change=""> 
+                </select>	
             </div>
             
             <div class="tab-1">
             	<p class="text"> Ngày đi: </p>
-                <input type="text" class="daytime" id="from" name="from" placeholder="dd/mm/yyyy"/>
+                <input type="text" class="daytime" id="from" name="from" placeholder="dd/mm/yyyy" readonly="true"/>
                 <p class="text" ng-show="show"> Ngày về: </p>
-                <input type="text" ng-show="show" class="daytime" id="to" name="to" placeholder="dd/mm/yyyy"/>
+                <input type="text" ng-show="show" class="daytime" id="to" name="to" placeholder="dd/mm/yyyy" readonly="true"/>
             </div>
             
             <div class="tab-1">
