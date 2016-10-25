@@ -168,10 +168,7 @@ hr {
 }
 
 .input-from {
-	background-image: url(../image/icon-sort.svg);
-	background-repeat: no-repeat;
-	background-size: 10px auto;
-	background-position: 186px center ;
+
 	float: left;
 	padding-left: 5px;
 	margin-top: 10px;

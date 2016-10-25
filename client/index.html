@@ -16,7 +16,7 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   $( function() {
-    var dateFormat = "mm/dd/yy",
+    var dateFormat = "mm-dd-yyyy",
       from = $( "#from" )
         .datepicker({
           defaultDate: "+1w",
@@ -33,7 +33,8 @@
       })
       .on( "change", function() {
         from.datepicker( "option", "maxDate", getDate( this ) );
-      });
+      })
+	  ;
  
     function getDate( element ) {
       var date;
@@ -42,7 +43,6 @@
       } catch( error ) {
         date = null;
       }
- 
       return date;
     }
   } );
@@ -79,18 +79,18 @@
                     
             <div class="tab-1">
             	<p class="text"> Khởi hành: </p>
-                <select class="input-from" ng-init="laySanBayDi()" ng-model="selectedNoidi" ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDi " ng-change="chonNoiDi(selectedNoidi)">
+                <select class="input-from" ng-model="selectedNoidi" ng-init="laySanBayDi()"  ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDi " ng-change="chonNoiDi(selectedNoidi)">
             	</select> 
                 <p class="text"> Kết thúc: </p>
-                <select class="input-from" ng-model="selectedNoiden" ng-options="item for item in sanBayDen " ng-change=""> 
+                <select class="input-from" ng-model="selectedNoiden" ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDen " ng-change=""> 
                 </select>	
             </div>
             
             <div class="tab-1">
             	<p class="text"> Ngày đi: </p>
-                <input type="text" class="daytime" id="from" name="from" placeholder="dd/mm/yyyy" readonly="true"/>
+                <input type="text" ng-model="selectedNgaydi" class="daytime" id="from" name="from" placeholder="dd/mm/yyyy" ng-model="date"/>
                 <p class="text" ng-show="show"> Ngày về: </p>
-                <input type="text" ng-show="show" class="daytime" id="to" name="to" placeholder="dd/mm/yyyy" readonly="true"/>
+                <input type="text" ng-model="selectedNgayve" ng-show="show" class="daytime" id="to" name="to" placeholder="dd/mm/yyyy" readonly="true"/>
             </div>
             
             <div class="tab-1">
@@ -110,9 +110,7 @@
             </div>
             
             <div class="tab-1">
-            	<a href="chon-chuyen-bay.html">
-            		<button type="button" class="btn-tim-kiem">Tìm chuyến bay</button>
-                </a>
+            		<button type="button" ng-model="btnTimCB" class="btn-tim-kiem" ng-click="timChuyenBay()">Tìm chuyến bay</button>
             </div>
         </div>
     </div>

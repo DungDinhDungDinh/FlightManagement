@@ -111,14 +111,15 @@ myapp.controller('myCtrl', function($scope, $http, Data){
     $scope.flights = [];
 
 	
-
 	$scope.chonNoiDi = function(selectedNoidi)
 	{
+		$scope.sanBayDen = [];
+		laySanBayDen(selectedNoidi);
 		//$scope.sanBayDen = [selectedNoidi];
 		//console.log($scope.sanBayDi);
 	}
 
-   $scope.laySanBayDi = function() {
+    $scope.laySanBayDi = function() {
          $http({
                 method: 'GET',
                 url: '/api/start_airports',
@@ -132,7 +133,6 @@ myapp.controller('myCtrl', function($scope, $http, Data){
                     }).then(function success(res) {
                         $scope.sanBayDi.push(res.data);
                         //console.log(res.data);
-						console.log($scope.sanBayDi);
                     })
                 }
             }, function errorCallback(response) {
@@ -266,9 +266,35 @@ myapp.controller('myCtrl', function($scope, $http, Data){
             });
     }
 
+	$scope.timChuyenBay = function ()
+	{
+		$scope.selectedNgaydi = $('#from').val();
+		$scope.selectedNgayve = $('#to').val();
+		
+		if($scope.selectedNgaydi == null)
+		{
+			alert('Vui lòng chọn ngày khởi hành!');
+			return;
+		}		
+		if($scope.selectedNgaydve == null && $scope.show == true)
+		{
+			alert('Vui lòng chọn ngày về !');
+			return;
+		}	
+		if($scope.selectedNoidi == null)
+		{
+			alert('Vui lòng chọn nơi đi!');
+			return;
+		}
+		if($scope.selectedNoiden == null)
+		{
+			alert('Vui lòng chọn nơi đến!');
+			return;
+		}	
+	}
 
 
-	datCho('BL327', 'C1', 4, '22-10-2016', 'danhXung', 'ho', 'ten', 'dienThoai', 'quocTich');
+	//datCho('BL327', 'C1', 4, '22-10-2016', 'danhXung', 'ho', 'ten', 'dienThoai', 'quocTich');
 
 	//TEST   
 	//$scope.laySanBayDi();

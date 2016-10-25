@@ -7,9 +7,9 @@ app.use(express.static('client'));
 
 
 var mongoose = require('mongoose');
-//mongoose.connect('mongodb://dungdinh:tthuyddung218@ds053136.mlab.com:53136/flight_management');
+mongoose.connect('mongodb://dungdinh:tthuyddung218@ds053136.mlab.com:53136/flight_management');
 
-mongoose.connect('mongodb://localhost/FlightManagement');
+//mongoose.connect('mongodb://localhost/FlightManagement');
 
 
 var Flight = require('./models/flight');
@@ -106,7 +106,7 @@ app.get('/api/dest_airports', function(req, res) {
     var ma = req.query.ma;
     Flight.find({
         _noiDi: ma
-    }).distinct('_noiDi',function(err, flights) 
+    }).distinct('_noiDen',function(err, flights) 
     {
         if (err) {
             res.status(400).send({
