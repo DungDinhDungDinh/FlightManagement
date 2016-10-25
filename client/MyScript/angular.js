@@ -273,24 +273,24 @@ myapp.controller('myCtrl', function($scope, $http){
 		$scope.selectedNgaydi = $('#from').val();
 		$scope.selectedNgayve = $('#to').val();
 		
-		if($scope.selectedNgaydi == null)
+		if($scope.selectedNgaydi == "")
 		{
 			alert('Vui lòng chọn ngày khởi hành!');
 			return;
 		}		
-		if($scope.selectedNgaydve == null && $scope.show == true)
+		if($scope.selectedNgaydve == "" && $scope.show == true)
 		{
 			alert('Vui lòng chọn ngày về !');
 			return;
 		}	
 		if($scope.selectedNoidi == null)
 		{
-			alert('Vui lòng chọn nơi đi!');
+			alert('Vui lòng chọn khởi hành!');
 			return;
 		}
 		if($scope.selectedNoiden == null)
 		{
-			alert('Vui lòng chọn nơi đến!');
+			alert('Vui lòng chọn kết thúc!');
 			return;
 		}	
 
@@ -303,7 +303,52 @@ myapp.controller('myCtrl', function($scope, $http){
         window.location.href = '/chon-chuyen-bay.html';
 	}
 
+	$scope.checkEx1 = function ()
+	{
+		$scope.ngaydi = $('#from1').val();		
+		console.log($scope.ngaydi);
+		if($scope.khoihanh == null)
+		{
+			alert('Vui lòng chọn khởi hành!');
+			return;
+		}
+		if($scope.ketthuc == null)
+		{
+			alert('Vui lòng chọn kết thúc!');
+			return;
+		}	
+		
+		if($scope.ngaydi == "")
+		{
+			alert('Vui lòng chọn ngày khởi hành!');
+			return;
+		}
+	}
+	
+	
+	$scope.checkEx2 = function ()
+	{		
+		if($scope.khoihanh == null)
+		{
+			alert('Vui lòng chọn khởi hành!');
+			return;
+		}
+		if($scope.ketthuc == null)
+		{
+			alert('Vui lòng chọn kết thúc!');
+			return;
+		}	
+	}
 
+
+	$scope.checkEx3 = function ()
+	{		
+		if($scope.maCB == null)
+		{
+			alert('Vui lòng nhập mã chuyến bay!');
+			return;
+		}	
+	}
 	//datCho('BL327', 'C1', 4, '22-10-2016', 'danhXung', 'ho', 'ten', 'dienThoai', 'quocTich');
 
 	//TEST   
@@ -323,7 +368,11 @@ myapp.controller('myCtrl', function($scope, $http){
 
     //themHanhKhach('ABCXYZ', 'Ong', 'Dang', 'ThanhDanh', '1234',  'Viet Nam');
 
-
+    
+        $scope.addNew = function(personalDetail){
+        	//
+        };
+    };    
 });
 
     
