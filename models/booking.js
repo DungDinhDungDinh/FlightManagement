@@ -3,11 +3,11 @@ var mongoose = require('mongoose');
 //Booking Schema
 var bookingSchema = mongoose.Schema({
 	_maDatCho:{
-		type:String,
+		type:Number,
 		required: true
 	},
 	_thoiGianDatCho:{
-		type:Number,
+		type:String,
 	},
 	_tongTien:{
 		type:Number,

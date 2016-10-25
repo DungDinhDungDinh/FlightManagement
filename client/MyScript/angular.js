@@ -101,31 +101,34 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
 		}
 	}
 
-	 $scope.sanBayDi = [];
+
+	$scope.sanBayDi = [];
     $scope.sanBayDen = [];
     $scope.flights = [];
 
-    var laySanBayDi = function() {
-         $http({
-                method: 'GET',
-                url: '/api/start_airports',
-            }).then(function successCallback(response) {
-                var airports = response.data;
-                for (var i = 0; i < airports.length; i++) {
-                    console.log(airports[i]._noiDi);
-                    $http({
-                        method: 'GET',
-                        url : '/api/airports/' + airports[i]._noiDi
-                    }).then(function success(res) {
-                        $scope.sanBayDi.push(res.data);
-                        console.log(res.data);
-                    })
-                }
-            }, function errorCallback(response) {
-                console.log('laySanBayDi failed');
 
-            });
+    var laySanBayDi = function() {
+        $http({
+            method: 'GET',
+            url: '/api/start_airports',
+        }).then(function successCallback(response) {
+            var airports = response.data;
+            for (var i = 0; i < airports.length; i++) {
+                console.log(airports[i]);
+                $http({
+                    method: 'GET',
+                    url: '/api/airports/' + airports[i]
+                }).then(function success(res) {
+                    $scope.sanBayDi.push(res.data);
+                    console.log(res.data);
+                });
+            }
+        }, function errorCallback(response) {
+            console.log('laySanBayDi failed');
+
+        });
     };
+
 
    var laySanBayDen = function(noiDi) {
          $http({
@@ -248,9 +251,30 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
     }
 
 
+var themDatCho = function(maChuyenBay, hang, ngayDatCho, soGheDat) {
+    	$http({
+                method: 'POST',
+                url: '/api/bookings',
+                data : {
+                	'maChuyenBay' : maChuyenBay,
+                	'hang' : hang,
+                	'ngayDatCho' : ngayDatCho,
+                	'soGheDat' : soGheDat
+                }
+            }).then(function successCallback(response) {
+                console.log('themDatCho success');
+                console.log(response.data);
+                
+            }, function errorCallback(response) {
+                console.log('themDatCho failed');
+            });
+    }
+
+    //themDatCho('BL327', 'C1', '22-10-2016', 4);
+
 	//TEST   
-    // laySanBayDi();
-    // console.log($scope.sanBayDi);
+    laySanBayDi();
+    console.log($scope.sanBayDi);
     // var sbdi = 'SGN';
     // laySanBayDen(sbdi);
     // console.log($scope.sanBayDen);
@@ -263,13 +287,9 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
     // timChuyenBay4('BL327');
     // console.log($scope.flights);
 
-    themHanhKhach('ABCXYZ', 'Ong', 'Dang', 'ThanhDanh', '1234',  'Viet Nam');
-
+    //themHanhKhach('ABCXYZ', 'Ong', 'Dang', 'ThanhDanh', '1234',  'Viet Nam');
 
 	
 });
 
 
-
-    
-	

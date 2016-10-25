@@ -21,3 +21,12 @@ var airPortSchema = mongoose.Schema({
 var Airport = mongoose.model('Airport',airPortSchema);
 
 module.exports = Airport;
+
+
+[
+	{	
+		"_ma" : '...',
+		"_nhomSanBay" : "...",
+		'_diaDanh' : '....'
+	}
+]
