@@ -1,8 +1,10 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Flight Management</title>
+<link rel="shortcut icon" href="image/FlightTrack-icon.png" type="image/png"/>
 <link href="MyScript/MyCss.css" rel="stylesheet" type="text/css" />
 <script src="MyScript/angular.min.js"></script>
 <script src="MyScript/angular.js"></script>
@@ -49,7 +51,7 @@
 <body>
 <div ng-app="myApp">
 	<div class="main" ng-controller="myCtrl">
-    	<div style="background-color:#F3F3F3">
+    	<div class="sub-main" style="background-color:#F3F3F3; font-family:Arial, Verdana, sans-serif;" >
             <div class="head-tab">
                     <a class="mua-ve">
                         <div class="tab-chosen">Mua vé trực tuyến</div>
@@ -68,7 +70,7 @@
          	<hr>
         </div>
         
-        <div class="center-tab" >
+        <div class="center-tab" style="font-family:Arial, Verdana, sans-serif;">
             <div class="tab-1"  ng-init="chieu1()">                         
             	<div  class="mot-chieu" ng-style="style1" ng-click="chieu1()"> Một chiều </div> 
             	<div  class="mot-chieu" ng-style="style2" ng-click="chieu2()"> Khứ hồi </div>   
