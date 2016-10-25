@@ -1,6 +1,22 @@
 
 
-var myapp = angular.module('myApp',[]);
+var myapp = angular.module('myApp',['ngRoute']);
+
+myapp.config(['$routeProvider', function($routeProvider) {
+    $routeProvider.
+      when('/home', {
+        templateUrl: './home.html',
+        controller: 'myCtrl'
+      }).
+      when('/chon-chuyen-bay', {
+        templateUrl: './chon-chuyen-bay.html',
+        controller: 'myCtrl1'
+      }).
+      otherwise({
+        redirectTo: '/home'
+      });
+  }]);
+
 
 myapp.controller('myCtrl', function($scope, $http){
 	$scope.number_value1 = ["1", "2", "3", "4", "5", "6"];
@@ -368,11 +384,7 @@ myapp.controller('myCtrl', function($scope, $http){
 
     //themHanhKhach('ABCXYZ', 'Ong', 'Dang', 'ThanhDanh', '1234',  'Viet Nam');
 
-    
-        $scope.addNew = function(personalDetail){
-        	//
-        };
-    };    
+       
 });
 
     
