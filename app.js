@@ -7,7 +7,9 @@ app.use(express.static('client'));
 
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/FlightManagement');
+mongoose.connect('mongodb://dungdinh:tthuyddung218@ds053136.mlab.com:53136/flight_management');
+
+//mongoose.connect('mongodb://localhost/FlightManagement');
 
 
 var Flight = require('./models/flight');
@@ -499,6 +501,43 @@ app.post('/api/bookings', function(req, res) {
                     //});
                 }
             });
+    });
+});
+
+app.post('/api/flights', function(req, res) {
+    var maChuyenBay = req.body.maChuyenBay;
+    var noiDi = req.body.noiDi;
+    var noiDen = req.body.noiDen;
+    var ngay = req.body.ngay;
+    var gio = req.body.gio;
+    var hang = req.body.hang;
+    var soGhe = req.body.soGhe;
+    var giaVe = req.body.giaVe;
+    
+    var f = new Flight({
+         _ma:maChuyenBay,
+         _noiDi:noiDi,
+         _noiDen:noiDen,
+         _ngayDi:ngay,
+         _gioDi: gio,
+         _hang: hang,
+         _soGhe: '200',
+         _giaVe: giaVe
+    });
+
+    f.save(function(err, f) {
+                if (err) {
+                    res.status(400).send({
+                        'error': 'Bad request (The data is invalid)'
+                    });
+                    return console.error(err);
+                } else {
+                    Booking.find(function(err, bookings) {
+                        res.status(201).send({
+                            'messege': 'Created'
+                        });
+                    });
+                }
     });
 });
 

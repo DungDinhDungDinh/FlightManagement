@@ -4,6 +4,13 @@ body {
 	background-repeat: no-repeat;
 }
 
+.btn-primary{
+    margin-right: 10px;
+}
+.container{
+  margin: 20px 0;
+}
+
 .main {
 	background: #FFF;
 	margin-top: 30px;

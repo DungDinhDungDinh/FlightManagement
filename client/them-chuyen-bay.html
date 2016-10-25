@@ -48,8 +48,7 @@
 </head>
 
 <body>
-<div ng-app="myApp">
-	<div class="main" ng-controller="myCtrl">
+	<div class="main" >
     	<div style="background-color:#F3F3F3">
         <div class="head-tab">
         	<a class="mua-ve" href="them_chuyen_bay.html">
@@ -63,70 +62,45 @@
         <div class="center-tab">
             
             <div class="tab-1">
-            	<p class="text" style="width:120px;"> Mã chuyến bay: </p>
-                <input class="input-normal" ng-model="inputMa" placeholder="Mã chuyến bay" />
+            	<p class="text" style="width:110px;"> Mã chuyến bay: </p>
+                <input class="input-normal" placeholder="Mã chuyến bay" />
                 
             	<p class="text clear"> Khởi hành: </p>
-                <select class="input-from" ng-model="khoihanh" ng-init="laySanBayDi()"  ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDi " ng-change="chonNoiDi(khoihanh)">
-            	</select> 
-                
+                <input class="input-from" placeholder="Form" />
                 <p class="text"> Kết thúc: </p>
-                <select class="input-from" ng-model="ketthuc" ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDen " ng-change=""> 
-                </select>	
+                <input class="input-from" placeholder="To" /> 	
 
             	<p class="text clear"> Ngày đi: </p>
-                <input type="text" class="daytime" ng-model="ngaydi" id="from" name="from" placeholder="dd/mm/yyyy"/>
+                <input type="text" class="daytime" id="from" name="from" placeholder="dd/mm/yyyy"/>
                 <p class="text"> Ngày về: </p>
-                <input type="text" class="daytime" ng-model="ngayve" id="to" name="to" placeholder="dd/mm/yyyy"/>
+                <input type="text" class="daytime" id="to" name="to" placeholder="dd/mm/yyyy"/>
 				
                 <p class="text clear"> Giờ: </p>
-                <select class="daytime input-thoi-gian" ng-model="inputTime">
-                      <option value="00:00">00:00</option>
-                      <option value="01:00">01:00</option>
-                      <option value="02:00">02:00</option>
-                      <option value="03:00">03:00</option>
-                      <option value="04:00">04:00</option>
-                      <option value="05:00">05:00</option>
-                      <option value="06:00">06:00</option>
-                      <option value="07:00">07:00</option>
-                      <option value="08:00">08:00</option>
-                      <option value="09:00">09:00</option>
-                      <option value="10:00">10:00</option>
-                      <option value="11:00">11:00</option>
-                      <option value="12:00">12:00</option>
-                      <option value="13:00">13:00</option>
-                      <option value="14:00">14:00</option>
-                      <option value="15:00">15:00</option>
-                      <option value="16:00">16:00</option>
-                      <option value="17:00">17:00</option>
-                      <option value="18:00">18:00</option>
-                      <option value="19:00">19:00</option>
-                      <option value="20:00">20:00</option>
-                      <option value="21:00">21:00</option>
-                      <option value="22:00">22:00</option>
-                      <option value="23:00">23:00</option>
-                </select>
+                <input type="time" class="daytime input-thoi-gian"/>    
                 <p class="text"> Hạng: </p>
-                <select class="input-normal input-gioi-tinh" ng-model="inputHang">
+                <select class="input-normal input-gioi-tinh">
                       <option value="C1">C1</option>
                       <option value="C2">C2</option>
                       <option value="E1">E1</option>
                       <option value="E2">E2</option>
                       <option value="E3">E3</option>
                 </select>
-                 <p class="text" style="width:110px;"> Số lượng ghế: </p>
-                <input class="input-normal input-gioi-tinh" ng-model="inputSoghe" type="number" min="0" />
+                 <p class="text"> Số lượng ghế </p>
+                <input class="input-normal input-gioi-tinh" type="number" min="0" />
                 
                 <p class="text clear"> Giá bán: </p>
-                <input class="input-normal"  ng-model="inputGiave" placeholder="Giá vé" />
+                <input class="input-normal" placeholder="Giá vé" />
+                
             </div>
-           
+            
+            
             <div class="tab-1 clear">
-            		<button type="button" ng-model="btnThem" class="btn-tim-kiem" ng-click="checkChuyenBay()">Thêm chuyến bay</button>
+            	<a href="chon-chuyen-bay.html">
+            		<button type="button" class="btn-tim-kiem">Thêm chuyến bay</button>
+                </a>
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>
 

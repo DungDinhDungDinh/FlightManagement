@@ -1,13 +1,6 @@
-<script src="MyScript/angular.min.js"></script>
-<script src="MyScript/angular-route.js"></script>
-<script src="MyScript/angular.js"></script>
 
 
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css"/>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
+  <script>
   $( function() {
     var dateFormat = "mm-dd-yyyy",
       from = $( "#from" )
@@ -39,9 +32,13 @@
       return date;
     }
   } );
-</script>
+  </script>
+
+
+
 <div>
 	<div class="main" ng-controller="myCtrl">
+
     	<div class="sub-main" style="background-color:#F3F3F3; font-family:Arial, Verdana, sans-serif;" >
             <div class="head-tab">
                     <a class="mua-ve">
@@ -78,8 +75,7 @@
             
             <div class="tab-1">
             	<p class="text"> Ngày đi: </p>
-                <input type="text" ng-model="selectedNgaydi" class="daytime" id="from" name="from" placeholder="dd/mm/yyyy" readonly="true"/>
-              
+                <input type="text" ng-model="selectedNgaydi" class="daytime" id="from" name="from" placeholder="dd/mm/yyyy" ng-model="date"/>
                 <p class="text" ng-show="show"> Ngày về: </p>
                 <input type="text" ng-model="selectedNgayve" ng-show="show" class="daytime" id="to" name="to" placeholder="dd/mm/yyyy" readonly="true"/>
             </div>

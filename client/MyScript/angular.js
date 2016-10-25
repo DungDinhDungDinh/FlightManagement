@@ -1,17 +1,42 @@
 
-var myapp = angular.module('myApp',[]);
+
+var myapp = angular.module('myApp',['ngRoute']);
+
+myapp.config(['$routeProvider', function($routeProvider) {
+    $routeProvider.
+      when('/home', {
+        templateUrl: './home.html',
+        controller: 'myCtrl'
+      }).
+      when('/chon-chuyen-bay.html', {
+        templateUrl: './chon-chuyen-bay.html',
+        controller: 'myCtrl'
+      }).
+      otherwise({
+        redirectTo: '/home'
+      });
+  }]);
+
 
 myapp.service('Data',function() {
-    this.test = 'abce';
+  this.noiDi = '';
+  this.noiDen = '';
+  this.ngayDi = '';
+  this.soNguoi;
 });
 
-myapp.controller('myCtrl', function($scope, $http, Data){
+myapp.controller('myCtrl', function($scope, $http, Data, $location){
 	$scope.number_value1 = ["1", "2", "3", "4", "5", "6"];
 	$scope.number_value2 = ["0", "1", "2"];
 	$scope.number_value3 = ["0", "1"];
 	$scope.danh_xung = ["Ông", "Bà"];
 
-    console.log(Data.test);
+    $scope.noiDi = '';
+    $scope.noiDen = '';
+    $scope.ngayDi = '';
+    $scope.ngayVe = '';
+    $scope.soNguoi = '';
+
 	$scope.chieu1 = function() 
     {
 		 $scope.style1 = {backgroundColor: '#337ab7'};
@@ -291,6 +316,14 @@ myapp.controller('myCtrl', function($scope, $http, Data){
 			alert('Vui lòng chọn kết thúc!');
 			return;
 		}	
+
+        Data.noiDi = $scope.selectedNoidi;
+        Data.noiDen = $scope.selectedNoiden;
+        Data.ngayDi = $scope.selectedNgaydi;
+        Data.ngayVe = $scope.selectedNgayve;
+        Data.soNguoi = $scope.selectedNumber1 + $scope.selectedNumber2 + $scope.selectedNumber3;
+
+       $location.path = '/chon-chuyen-bay';
 	}
 
 	$scope.checkEx1 = function ()
@@ -339,86 +372,6 @@ myapp.controller('myCtrl', function($scope, $http, Data){
 			return;
 		}	
 	}
-	
-	$scope.checkKhachHang = function ()
-	{		
-		if($scope.selectedDX == null)
-		{
-			alert('Vui lòng chọn danh xưng!');
-			return;
-		}		
-		if($scope.inputHo == null)
-		{
-			alert('Vui lòng nhập Họ!');
-			return;
-		}	
-		if($scope.inputTen == null)
-		{
-			alert('Vui lòng nhập Tên!');
-			return;
-		}	
-		if($scope.inputSDT == null)
-		{
-			alert('Vui lòng nhập SDT!');
-			return;
-		}
-		if($scope.inputNation == null)
-		{
-			alert('Vui lòng nhập Quốc gia!');
-			return;
-		}
-	}
-	
-	$scope.checkChuyenBay = function ()
-	{		
-		$scope.ngaydi = $('#from').val();
-		$scope.ngayve = $('#to').val();
-		console.log($scope.inputTime);
-		if($scope.inputMa == null)
-		{
-			alert('Vui lòng nhập mã chuyến bay!');
-			return;
-		}		
-		
-		if($scope.khoihanh == "" || $scope.khoihanh == null)
-		{
-			alert('Vui lòng chọn nơi khởi hành!');
-			return;
-		}	
-		if($scope.ketthuc == "" || $scope.ketthuc == null)
-		{
-			alert('Vui lòng chọn nơi kết thúc!');
-			return;
-		}
-		
-		if($scope.ngaydi == "")
-		{
-			alert('Vui lòng chọn ngày đi!');
-			return;
-		}	
-		if($scope.ngayve == "")
-		{
-			alert('Vui lòng chọn ngày về!');
-			return;
-		}
-
-		if($scope.inputTime == "")
-		{
-			alert('Vui lòng chọn thời gian!');
-			return;
-		}
-		if($scope.inputHang == null)
-		{
-			alert('Vui lòng chọn hạng!');
-			return;
-		}
-		if($scope.inputGiave == null || $scope.inputGiave == "")
-		{
-			alert('Vui lòng nhập giá vé!');
-			return;
-		}
-	}
-	
 	//datCho('BL327', 'C1', 4, '22-10-2016', 'danhXung', 'ho', 'ten', 'dienThoai', 'quocTich');
 
 	//TEST   
@@ -438,10 +391,11 @@ myapp.controller('myCtrl', function($scope, $http, Data){
 
     //themHanhKhach('ABCXYZ', 'Ong', 'Dang', 'ThanhDanh', '1234',  'Viet Nam');
 
-
+       
 });
-
-
 
     
 	
+myapp.controller('myCtrl', function($scope, $http){
+       
+});

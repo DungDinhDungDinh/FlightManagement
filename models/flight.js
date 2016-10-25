@@ -18,6 +18,9 @@ var flightSchema = mongoose.Schema({
 		type:String,
 		required:true
 	},
+	_gioDi : {
+		type :String
+	},
 	_hang:{
 		type:String,
 		required:true
