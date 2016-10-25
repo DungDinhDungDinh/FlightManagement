@@ -8,14 +8,14 @@
 <script src="MyScript/angular.min.js"></script>
 <script src="MyScript/angular.js" type="text/javascript"></script>
 
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css"/>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css"/>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
   $( function() {
     var dateFormat = "mm/dd/yy",
-      from = $( "#from" )
+      from1 = $( "#from1" )
         .datepicker({
           defaultDate: "+1w",
           changeMonth: true,
@@ -48,7 +48,8 @@
 </head>
 
 <body>
-	<div class="main" >
+<div ng-app="myApp">
+	<div class="main" ng-controller="myCtrl" >
     	<div style="background-color:#F3F3F3">
         
             <div class="head-tab">
@@ -81,22 +82,23 @@
         <div class="center-tab">
             
             <div class="tab-1">
-            	<p class="text"> Khởi hành: </p>
-                <input class="input-from" placeholder="Từ" />
+                <p class="text"> Khởi hành: </p>
+                <select class="input-from" ng-model="khoihanh" ng-init="laySanBayDi()"  ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDi " ng-change="chonNoiDi(khoihanh)">
+            	</select> 
                 
                 <p class="text clear"> Kết thúc: </p>
-                <input class="input-from" placeholder="Đến" /> 	
+                <select class="input-from" ng-model="ketthuc" ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDen " ng-change=""> 
+                </select>
                 
                 <p class="text clear"> Ngày đi: </p>
-                <input type="text" class="daytime" id="from" name="from" placeholder="dd/mm/yyyy"/>
+                <input type="text" class="daytime" ng-model="ngaydi" id="from1" name="from1" placeholder="dd/mm/yyyy"/>
             </div>
                   
             <div class="tab-1 clear">
-            	<a href="chon-chuyen-bay.html">
-            		<button type="button" class="btn-tim-kiem">Tìm chuyến bay</button>
-                </a>
+            		<button type="button" ng-model="btnTimCB1" class="btn-tim-kiem" ng-click="checkEx1()">Tìm chuyến bay</button>
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>

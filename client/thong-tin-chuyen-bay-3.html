@@ -5,10 +5,18 @@
 <title>Flight Mangagement</title>
 <link rel="shortcut icon" href="image/FlightTrack-icon.png" type="image/png"/>
 <link href="MyScript/MyCss.css" rel="stylesheet" type="text/css" />
+<script src="MyScript/angular.min.js"></script>
+<script src="MyScript/angular.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css"/>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
-	<div class="main" >
+<div ng-app="myApp">
+	<div class="main" ng-controller="myCtrl" >
     	<div style="background-color:#F3F3F3">
             <div class="head-tab">
                 <a class="mua-ve" href="index.html">
@@ -41,15 +49,14 @@
             
             <div class="tab-1">
             	<p class="text" style="width: 130px"> Mã chuyến bay: </p>
-                <input class="input-from" placeholder="Mã chuyến bay" />
+                <input class="input-from" ng-model="maCB" placeholder="Mã chuyến bay" />
             </div>
                   
             <div class="tab-1 clear">
-            	<a href="chon-chuyen-bay.html">
-            		<button type="button" class="btn-tim-kiem">Tìm chuyến bay</button>
-                </a>
+            		<button type="button" ng-model="btnTimCB3" class="btn-tim-kiem" ng-click="checkEx3()">Tìm chuyến bay</button>
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>
