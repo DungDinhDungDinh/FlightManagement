@@ -10,10 +10,15 @@ body {
 	margin-left: 200px;
 	margin-right: 200px;
 	height: auto;
-	width: auto;	
+	width: auto;
+	border-radius: 25px;	
 }
 hr {
 	margin: 0;
+}
+
+.sub-main{
+	border-radius: 25px;
 }
 
 .head-tab {
@@ -22,6 +27,7 @@ hr {
 	margin-bottom: 30px;
 	background-color:#337ab7;
 	font-weight: bold;
+	font-family: Arial, Verdana, sans-serif;
 }
 
 .tim-chuyen-bay-tab {
@@ -30,13 +36,13 @@ hr {
 	width: auto;
 	line-height: 50px;
 	font-weight: bold;
-
+	font-family:Arial, Verdana, sans-serif;
 }
 .center-tab {
 	margin-top: 20px;
 	display: inline-block;
 	width: 100%;
-	
+	font-family: Arial, Verdana, sans-serif;
 }
 
 .mua-ve {
@@ -59,7 +65,7 @@ hr {
 	color:#FFF;
 	font-size: 17px;
 	background-color: #03C;
-
+	font-family:Arial, Verdana, sans-serif;
 }
 
 .tab-chosen {
@@ -74,6 +80,7 @@ hr {
 	float: left;
 	font-size: 17px;
 	background-color:#F3F3F3;	
+	font-family:Arial, Verdana, sans-serif;
 }
 
 .tab2 {
@@ -93,9 +100,7 @@ hr {
 	width: 170px;
 	float: left;
 	background-color: #6CF;
-	border-style: solid;
 	border-width: 1px;
-	border-color: #6CF;
 }
 
 .tab3 {
@@ -105,6 +110,7 @@ hr {
 	float: left;	
 	font-size: 17px;
 	background-color:#F3F3F3;
+	font-family:Arial, Verdana, sans-serif;
 }
 
 .tab3-chosen {
@@ -112,11 +118,10 @@ hr {
 	height: 50px;
 	width: 200px;
 	float: left;
-	font-size: 17px;
-	border-style: solid;
 	border-width: 1px;
 	border-bottom-color: #FFF;
 	background-color:#FFF;	
+	font-family:Arial, Verdana, sans-serif;
 }
 
 .mot-chieu {
@@ -265,6 +270,7 @@ hr {
 	border-color: #F90;
 	color:#F90;
 	font-size:16px;
+
 }
 
 .btn-tim-kiem:hover

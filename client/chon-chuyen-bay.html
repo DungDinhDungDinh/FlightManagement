@@ -3,14 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Flight Management</title>
+<link rel="shortcut icon" href="image/FlightTrack-icon.png" type="image/png"/>
 <link href="MyScript/MyCss.css" rel="stylesheet" type="text/css" />
-<script src="MyScript/angular.min.js"></script>
-<script src="MyScript/angular.js"></script>
 </head>
 
-<body ng-app="myApp">
+<body>
 	<div class="main" >
-		<div style="background-color:#F3F3F3">
+		<div style="background-color:#F3F3F3; font-family:Arial, Verdana, sans-serif;">
             <div class="head-tab">
                     <a class="mua-ve" href="index.html">
                         <div class="tab-chosen">Mua vé trực tuyến</div>
@@ -29,12 +28,8 @@
          	<hr>
         </div>
         
-        <div class="center-tab" ng-controller="myCtrl"> 
-            <div ng-repeat="flight in flights">
-			<p> {{flight._ma}} |  {{flight._noiDi}} | 
-             {{flight._noiDen}} | {{flight._ngayDi}} |  {{flight._hang}} | {{flight._soGhe}} |  {{flight._giaVe}} | </p> <button> Đặt vé</button>
-             
-             </div>
+        <div class="center-tab">
+			<p>	Đổ dữ liệu ở đây </p>
             
             <div class="tab-1">
                 <a href="nhap-thong-tin-khach.html">
