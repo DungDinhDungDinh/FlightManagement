@@ -358,7 +358,11 @@ myapp.controller('myCtrl', function($scope, $http, Data){
 
     //themHanhKhach('ABCXYZ', 'Ong', 'Dang', 'ThanhDanh', '1234',  'Viet Nam');
 
-
+    
+        $scope.addNew = function(personalDetail){
+        	//
+        };
+    };    
 });
 
 
