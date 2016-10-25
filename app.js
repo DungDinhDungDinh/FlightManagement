@@ -106,13 +106,14 @@ app.get('/api/dest_airports', function(req, res) {
     var ma = req.query.ma;
     Flight.find({
         _noiDi: ma
-    }).select('_noiDen -_id').exec(function(err, arrs) {
+    }).distinct('_noiDi',function(err, flights) 
+    {
         if (err) {
             res.status(400).send({
                 'error': 'Bad request (The data is invalid)'
             });
         } else {
-            res.status(200).send(arrs);
+            res.status(200).send(flights);
         }
     });
 });
@@ -145,31 +146,31 @@ app.get('/detailarr_airports/:ma', function(req, res) {
 
 //API4 Tim chuyen bay thoa yeu cau
 //Chua xu ly duoc so ghe
-app.get('/flights', function(req, res) {
-    var maNoiDi = req.params.maNoiDi;
-    var maNoiDen = req.params.maNoiDen;
-    var ngayDi = req.params.ngayDi;
-    var soNguoi = req.params.soNguoi;
+// app.get('/flights', function(req, res) {
+//     var maNoiDi = req.params.maNoiDi;
+//     var maNoiDen = req.params.maNoiDen;
+//     var ngayDi = req.params.ngayDi;
+//     var soNguoi = req.params.soNguoi;
 
-    console.log('soNguoi', soNguoi);
+//     console.log('soNguoi', soNguoi);
 
-    Flight.find({
-        _noiDi: maNoiDi,
-        _noiDen: maNoiDen,
-        _ngayDi: ngayDi,
-        "$where": "this._soGhe >= 0"
-    }).select('_ma _noiDi _noiDen _ngayDi _gioDi _soGhe _giaVe -_id').exec(function(err, flights) {
-        if (err) {
-            res.status(400).send({
-                'error': 'Bad request (The data is invalid)'
-            });
-            return console.error(err);
-        } else {
-            res.status(200).send(flights);
-            console.log(flights);
-        }
-    });
-});
+//     Flight.find({
+//         _noiDi: maNoiDi,
+//         _noiDen: maNoiDen,
+//         _ngayDi: ngayDi,
+//         "$where": "this._soGhe >= 0"
+//     }).select('_ma _noiDi _noiDen _ngayDi _gioDi _soGhe _giaVe -_id').exec(function(err, flights) {
+//         if (err) {
+//             res.status(400).send({
+//                 'error': 'Bad request (The data is invalid)'
+//             });
+//             return console.error(err);
+//         } else {
+//             res.status(200).send(flights);
+//             console.log(flights);
+//         }
+//     });
+// });
 
 //API7 Lay danh sach hanh khach
 app.get('/passengers', function(req, res) {

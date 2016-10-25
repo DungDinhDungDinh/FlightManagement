@@ -144,10 +144,10 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
                 console.log(response.data);
                 var airports = response.data;
                 for (var i = 0; i < airports.length; i++) {
-                    console.log(airports[i]._noiDen);
+                    console.log(airports[i]);
                     $http({
                         method: 'GET',
-                        url : '/api/airports/' + airports[i]._noiDen
+                        url : '/api/airports/' + airports[i]
                     }).then(function success(res) {
                         $scope.sanBayDen.push(res.data);
                         console.log(res.data);
@@ -257,11 +257,11 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
 	
 
 	//TEST   
-     //laySanBayDi();
-    console.log($scope.sanBayDi);
-    // var sbdi = 'SGN';
-    // laySanBayDen(sbdi);
-    // console.log($scope.sanBayDen);
+	//$scope.laySanBayDi();
+    //console.log($scope.sanBayDi);
+      var sbdi = 'SGN';
+     laySanBayDen(sbdi);
+     console.log($scope.sanBayDen);
     // timChuyenBay1('SGN', 'BMT', '22-10-2016', 4);
     // console.log($scope.flights);
     // timChuyenBay2('SGN', 'BMT', '22-10-2016');
