@@ -1,17 +1,19 @@
 
+
 var myapp = angular.module('myApp',[]);
 
-myapp.service('Data',function() {
-    this.test = 'abce';
-});
-
-myapp.controller('myCtrl', function($scope, $http, Data){
+myapp.controller('myCtrl', function($scope, $http){
 	$scope.number_value1 = ["1", "2", "3", "4", "5", "6"];
 	$scope.number_value2 = ["0", "1", "2"];
 	$scope.number_value3 = ["0", "1"];
 	$scope.danh_xung = ["Ông", "Bà"];
 
-    console.log(Data.test);
+    $scope.noiDi = '';
+    $scope.noiDen = '';
+    $scope.ngayDi = '';
+    $scope.ngayVe = '';
+    $scope.soNguoi = '';
+
 	$scope.chieu1 = function() 
     {
 		 $scope.style1 = {backgroundColor: '#337ab7'};
@@ -291,6 +293,14 @@ myapp.controller('myCtrl', function($scope, $http, Data){
 			alert('Vui lòng chọn nơi đến!');
 			return;
 		}	
+
+        $scope.noiDi = $scope.selectedNoidi;
+        $scope.noiDen = $scope.selectedNoiden;
+        $scope.ngayDi = $scope.selectedNgaydi;
+        $scope.ngayVe = $scope.selectedNgayve;
+        $scope.soNguoi = $scope.selectedNumber1 + $scope.selectedNumber2 + $scope.selectedNumber3;
+
+        window.location.href = '/chon-chuyen-bay.html';
 	}
 
 
@@ -315,8 +325,6 @@ myapp.controller('myCtrl', function($scope, $http, Data){
 
 
 });
-
-
 
     
 	
