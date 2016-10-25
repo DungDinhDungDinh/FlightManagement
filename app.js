@@ -7,9 +7,9 @@ app.use(express.static('client'));
 
 
 var mongoose = require('mongoose');
-//mongoose.connect('mongodb://dungdinh:tthuyddung218@ds053136.mlab.com:53136/flight_management');
+mongoose.connect('mongodb://dungdinh:tthuyddung218@ds053136.mlab.com:53136/flight_management');
 
-mongoose.connect('mongodb://localhost/FlightManagement');
+//mongoose.connect('mongodb://localhost/FlightManagement');
 
 
 var Flight = require('./models/flight');
@@ -70,7 +70,9 @@ Flight.find({
 });
 
 // API1 lấy danh sách mã nơi đi
+
 app.get('/api/start_airports', function(req, res) {
+
     Flight.find().distinct('_noiDi',function(err, flights) 
     {
         if (err)
@@ -81,6 +83,7 @@ app.get('/api/start_airports', function(req, res) {
         }
     });
 });
+
 
 //API2 lay thong tin san bay
 app.get('/api/airports/:ma', function(req, res) {
@@ -550,4 +553,4 @@ app.get('/', function(req, res) {
     res.send('Test!!');
 });
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 8081);

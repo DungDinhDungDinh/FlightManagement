@@ -1,12 +1,10 @@
 
-
-
-
 angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
 	$scope.number_value1 = ["1", "2", "3", "4", "5", "6"];
 	$scope.number_value2 = ["0", "1", "2"];
 	$scope.number_value3 = ["0", "1"];
 	$scope.danh_xung = ["Ông", "Bà"];
+	
 	
 	$scope.chieu1 = function() 
     {
@@ -101,34 +99,40 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
 		}
 	}
 
-
+	$scope.sanBayDi1 = [];
 	$scope.sanBayDi = [];
     $scope.sanBayDen = [];
     $scope.flights = [];
 
+	
+	$scope.chonNoiDi = function(selectedNoidi)
+	{
+		//$scope.sanBayDen = [selectedNoidi];
+		//console.log($scope.sanBayDi);
+	}
 
-    var laySanBayDi = function() {
-        $http({
-            method: 'GET',
-            url: '/api/start_airports',
-        }).then(function successCallback(response) {
-            var airports = response.data;
-            for (var i = 0; i < airports.length; i++) {
-                console.log(airports[i]);
-                $http({
-                    method: 'GET',
-                    url: '/api/airports/' + airports[i]
-                }).then(function success(res) {
-                    $scope.sanBayDi.push(res.data);
-                    console.log(res.data);
-                });
-            }
-        }, function errorCallback(response) {
-            console.log('laySanBayDi failed');
+   $scope.laySanBayDi = function() {
+         $http({
+                method: 'GET',
+                url: '/api/start_airports',
+            }).then(function successCallback(response) {
+                var airports = response.data;
+					
+                for (var i = 0; i < airports.length; i++) {
+                    $http({
+                        method: 'GET',
+                        url : '/api/airports/' + airports[i]
+                    }).then(function success(res) {
+                        $scope.sanBayDi.push(res.data);
+                        //console.log(res.data);
+						console.log($scope.sanBayDi);
+                    })
+                }
+            }, function errorCallback(response) {
+                console.log('laySanBayDi failed');
 
-        });
+            });
     };
-
 
    var laySanBayDen = function(noiDi) {
          $http({
@@ -250,30 +254,10 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
             });
     }
 
-
-var themDatCho = function(maChuyenBay, hang, ngayDatCho, soGheDat) {
-    	$http({
-                method: 'POST',
-                url: '/api/bookings',
-                data : {
-                	'maChuyenBay' : maChuyenBay,
-                	'hang' : hang,
-                	'ngayDatCho' : ngayDatCho,
-                	'soGheDat' : soGheDat
-                }
-            }).then(function successCallback(response) {
-                console.log('themDatCho success');
-                console.log(response.data);
-                
-            }, function errorCallback(response) {
-                console.log('themDatCho failed');
-            });
-    }
-
-    //themDatCho('BL327', 'C1', '22-10-2016', 4);
+	
 
 	//TEST   
-    laySanBayDi();
+     //laySanBayDi();
     console.log($scope.sanBayDi);
     // var sbdi = 'SGN';
     // laySanBayDen(sbdi);
@@ -289,7 +273,9 @@ var themDatCho = function(maChuyenBay, hang, ngayDatCho, soGheDat) {
 
     //themHanhKhach('ABCXYZ', 'Ong', 'Dang', 'ThanhDanh', '1234',  'Viet Nam');
 
-	
 });
 
 
+
+    
+	
