@@ -25,7 +25,7 @@ var Airport = require('./models/airport');
 // 	_ma:'BL327',
 // 	_noiDi:'SGN',
 // 	_noiDen:'BMT',
-// 	_ngayDi:'22-10-2016',
+// 	_ngayDi:'10-25-2016',
 // 	_gioDi: '7:45',
 // 	_hang: 'C1',
 // 	_soGhe: '200',
@@ -44,17 +44,17 @@ var Airport = require('./models/airport');
 
 
 //API Lấy danh sách chuyến bay
-app.get('/flights', function(req, res) {
-    // get all the flights
-    Flight.find(function(err, flights) {
-        if (err)
-            return console.error(err);
-        else {
-            res.send(flights);
-            //console.log(flights);
-        }
-    });
-});
+// app.get('/flights', function(req, res) {
+//     // get all the flights
+//     Flight.find(function(err, flights) {
+//         if (err)
+//             return console.error(err);
+//         else {
+//             res.send(flights);
+//             //console.log(flights);
+//         }
+//     });
+// });
 
 
 //Ham lay danh sach cac chuyen bay theo muc gia (E)
@@ -343,6 +343,7 @@ app.get('/api/flights', function(req, res) {
     var maChuyenBay = req.query.maChuyenBay;
 
     var paramsNumber = Object.keys(req.query).length;
+
 
     if (paramsNumber == 4) {
         Flight.find({

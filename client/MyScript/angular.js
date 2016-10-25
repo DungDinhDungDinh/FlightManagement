@@ -8,9 +8,9 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './home.html',
         controller: 'myCtrl'
       }).
-      when('/chon-chuyen-bay.html', {
+      when('/chon-chuyen-bay', {
         templateUrl: './chon-chuyen-bay.html',
-        controller: 'myCtrl'
+        controller: 'chonChuyenBayCtrl'
       }).
       otherwise({
         redirectTo: '/home'
@@ -23,10 +23,12 @@ myapp.service('Data',function() {
   this.noiDen = '';
   this.ngayDi = '';
   this.soNguoi;
+  this.maChuyenBay = '';
+  this.hang = '';
 });
 
-myapp.controller('myCtrl', function($scope, $http, Data, $location){
-	$scope.number_value1 = ["1", "2", "3", "4", "5", "6"];
+myapp.controller('myCtrl',  ['$scope', '$http', 'Data', '$location', function ($scope, $http, Data, $location) {
+ 	$scope.number_value1 = ["1", "2", "3", "4", "5", "6"];
 	$scope.number_value2 = ["0", "1", "2"];
 	$scope.number_value3 = ["0", "1"];
 	$scope.danh_xung = ["Ông", "Bà"];
@@ -135,13 +137,10 @@ myapp.controller('myCtrl', function($scope, $http, Data, $location){
     $scope.sanBayDen = [];
     $scope.flights = [];
 
-	
-	$scope.chonNoiDi = function(selectedNoidi)
+    $scope.chonNoiDi = function(selectedNoidi)
 	{
 		$scope.sanBayDen = [];
 		laySanBayDen(selectedNoidi);
-		//$scope.sanBayDen = [selectedNoidi];
-		//console.log($scope.sanBayDi);
 	}
 
     $scope.laySanBayDi = function() {
@@ -191,107 +190,8 @@ myapp.controller('myCtrl', function($scope, $http, Data, $location){
             });
     };
 
-    var timChuyenBay1 = function(noiDi, noiDen, ngayDi, soNguoi) {
-    	$http({
-                method: 'GET',
-                url: '/api/flights',
-                params : {
-                	'maNoiDi' : noiDi,
-                	'maNoiDen' : noiDen,
-                	'ngayDi' : ngayDi,
-                	'soNguoi' : soNguoi
-                }
-            }).then(function successCallback(response) {
-                console.log('timChuyenBay1 success');
-                console.log(response.data);
-                $scope.flights = response.data;
-                
-            }, function errorCallback(response) {
-                console.log('timChuyeBay1 failed');
-            });
-    }
 
-    var timChuyenBay2 = function(noiDi, noiDen, ngayDi) {
-    	$http({
-                method: 'GET',
-                url: '/api/flights',
-                params : {
-                	'maNoiDi' : noiDi,
-                	'maNoiDen' : noiDen,
-                	'ngayDi' : ngayDi
-                }
-            }).then(function successCallback(response) {
-                console.log('timChuyenBay2 success');
-                console.log(response.data);
-                $scope.flights = response.data;
-                
-            }, function errorCallback(response) {
-                console.log('timChuyeBay2 failed');
-            });
-    }
-
-    var timChuyenBay3 = function(noiDi, noiDen) {
-    	$http({
-                method: 'GET',
-                url: '/api/flights',
-                params : {
-                	'maNoiDi' : noiDi,
-                	'maNoiDen' : noiDen
-                }
-            }).then(function successCallback(response) {
-                console.log('timChuyenBay3 success');
-                console.log(response.data);
-                $scope.flights = response.data;
-                
-            }, function errorCallback(response) {
-                console.log('timChuyeBay3 failed');
-            });
-    }
-
-    var timChuyenBay4 = function(maChuyenBay) {
-    	$http({
-                method: 'GET',
-                url: '/api/flights',
-                params : {
-                	'maChuyenBay' : maChuyenBay
-                }
-            }).then(function successCallback(response) {
-                console.log('timChuyenBay4 success');
-                console.log(response.data);
-                $scope.flights = response.data;
-                
-            }, function errorCallback(response) {
-                console.log('timChuyeBay4 failed');
-            });
-    }
-
-
-    var datCho = function(maChuyenBay, hang, soGheDat, ngayDi,
-    						danhXung, ho, ten, dienThoai, quocTich) {
-    	$http({
-                method: 'POST',
-                url: '/api/bookings',
-                data : {
-                	'maChuyenBay' : maChuyenBay,
-                	'hang' : hang,
-                	'soGheDat' : soGheDat,
-                	'ngayDi' : ngayDi,
-                	'danhXung' : danhXung,
-                	'ho' : ho,
-                	'ten' : ten,
-                	'dienThoai' : dienThoai,
-                	'quocTich' : quocTich
-                }
-            }).then(function successCallback(response) {
-                console.log('themHanhKhach success');
-                console.log(response.data);
-                
-            }, function errorCallback(response) {
-                console.log('themHanhKhach failed');
-            });
-    }
-
-	$scope.timChuyenBay = function ()
+    $scope.timChuyenBay = function ()
 	{
 		$scope.selectedNgaydi = $('#from').val();
 		$scope.selectedNgayve = $('#to').val();
@@ -319,83 +219,41 @@ myapp.controller('myCtrl', function($scope, $http, Data, $location){
 
         Data.noiDi = $scope.selectedNoidi;
         Data.noiDen = $scope.selectedNoiden;
-        Data.ngayDi = $scope.selectedNgaydi;
+        Data.ngayDi = $scope.selectedNgaydi.replace(/\//g,"-");
         Data.ngayVe = $scope.selectedNgayve;
-        Data.soNguoi = $scope.selectedNumber1 + $scope.selectedNumber2 + $scope.selectedNumber3;
+        Data.soNguoi = parseInt($scope.selectedNumber1, 10)
+                		parseInt($scope.selectedNumber2, 10)
+        				  parseInt($scope.selectedNumber3, 10);
+  
+       $location.path('/chon-chuyen-bay');
+   }
+}]);
 
-       $location.path = '/chon-chuyen-bay';
-	}
+myapp.controller('chonChuyenBayCtrl',  ['$scope', '$http', 'Data', '$location', function ($scope, $http, Data, $location) {
 
-	$scope.checkEx1 = function ()
-	{
-		$scope.ngaydi = $('#from1').val();		
-		console.log($scope.ngaydi);
-		if($scope.khoihanh == null)
-		{
-			alert('Vui lòng chọn khởi hành!');
-			return;
-		}
-		if($scope.ketthuc == null)
-		{
-			alert('Vui lòng chọn kết thúc!');
-			return;
-		}	
-		
-		if($scope.ngaydi == "")
-		{
-			alert('Vui lòng chọn ngày khởi hành!');
-			return;
-		}
-	}
-	
-	
-	$scope.checkEx2 = function ()
-	{		
-		if($scope.khoihanh == null)
-		{
-			alert('Vui lòng chọn khởi hành!');
-			return;
-		}
-		if($scope.ketthuc == null)
-		{
-			alert('Vui lòng chọn kết thúc!');
-			return;
-		}	
-	}
+	console.log(Data.ngayDi);
 
+	$scope.timChuyenBay1 = function(noiDi, noiDen, ngayDi, soNguoi) {
+    	$http({
+                method: 'GET',
+                url: '/api/flights',
+                params : {
+                	'maNoiDi' : noiDi,
+                	'maNoiDen' : noiDen,
+                	'ngayDi' : ngayDi,
+                	'soNguoi' : soNguoi
+                }
+            }).then(function successCallback(response) {
+                console.log('timChuyenBay1 success');
+                console.log(response.data);
+                $scope.flights = response.data;
+                
+            }, function errorCallback(response) {
+                console.log('timChuyeBay1 failed');
+            });
+    };
 
-	$scope.checkEx3 = function ()
-	{		
-		if($scope.maCB == null)
-		{
-			alert('Vui lòng nhập mã chuyến bay!');
-			return;
-		}	
-	}
-	//datCho('BL327', 'C1', 4, '22-10-2016', 'danhXung', 'ho', 'ten', 'dienThoai', 'quocTich');
+    $scope.flights = [];
+    $scope.timChuyenBay1(Data.noiDi, Data.noiDen, Data.ngayDi, Data.soNguoi);
 
-	//TEST   
-	//$scope.laySanBayDi();
-    //console.log($scope.sanBayDi);
-     //  var sbdi = 'SGN';
-     // laySanBayDen(sbdi);
-     // console.log($scope.sanBayDen);
-    // timChuyenBay1('SGN', 'BMT', '22-10-2016', 4);
-    // console.log($scope.flights);
-    // timChuyenBay2('SGN', 'BMT', '22-10-2016');
-    // console.log($scope.flights);
-    // timChuyenBay3('SGN', 'BMT');
-    // console.log($scope.flights);
-    // timChuyenBay4('BL327');
-    // console.log($scope.flights);
-
-    //themHanhKhach('ABCXYZ', 'Ong', 'Dang', 'ThanhDanh', '1234',  'Viet Nam');
-
-       
-});
-
-    
-	
-myapp.controller('myCtrl', function($scope, $http){
-       
-});
+}]);
