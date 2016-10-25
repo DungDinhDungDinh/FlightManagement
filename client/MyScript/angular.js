@@ -151,25 +151,80 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
             });
     };
 
-    var timChuyenBay = function(noiDi, noiDen, ngayDi, soNguoi) {
+    var timChuyenBay1 = function(noiDi, noiDen, ngayDi, soNguoi) {
     	$http({
-                method: 'POST',
+                method: 'GET',
                 url: '/api/flights',
-                data : {
+                params : {
                 	'maNoiDi' : noiDi,
                 	'maNoiDen' : noiDen,
                 	'ngayDi' : ngayDi,
                 	'soNguoi' : soNguoi
                 }
             }).then(function successCallback(response) {
-                console.log('timChuyenBay success');
+                console.log('timChuyenBay1 success');
                 console.log(response.data);
                 $scope.flights = response.data;
                 
             }, function errorCallback(response) {
-                console.log('timChuyeBay failed');
+                console.log('timChuyeBay1 failed');
             });
     }
+
+    var timChuyenBay2 = function(noiDi, noiDen, ngayDi) {
+    	$http({
+                method: 'GET',
+                url: '/api/flights',
+                params : {
+                	'maNoiDi' : noiDi,
+                	'maNoiDen' : noiDen,
+                	'ngayDi' : ngayDi
+                }
+            }).then(function successCallback(response) {
+                console.log('timChuyenBay2 success');
+                console.log(response.data);
+                $scope.flights = response.data;
+                
+            }, function errorCallback(response) {
+                console.log('timChuyeBay2 failed');
+            });
+    }
+
+    var timChuyenBay3 = function(noiDi, noiDen) {
+    	$http({
+                method: 'GET',
+                url: '/api/flights',
+                params : {
+                	'maNoiDi' : noiDi,
+                	'maNoiDen' : noiDen
+                }
+            }).then(function successCallback(response) {
+                console.log('timChuyenBay3 success');
+                console.log(response.data);
+                $scope.flights = response.data;
+                
+            }, function errorCallback(response) {
+                console.log('timChuyeBay3 failed');
+            });
+    }
+
+    var timChuyenBay4 = function(maChuyenBay) {
+    	$http({
+                method: 'GET',
+                url: '/api/flights',
+                params : {
+                	'maChuyenBay' : maChuyenBay
+                }
+            }).then(function successCallback(response) {
+                console.log('timChuyenBay4 success');
+                console.log(response.data);
+                $scope.flights = response.data;
+                
+            }, function errorCallback(response) {
+                console.log('timChuyeBay4 failed');
+            });
+    }
+
 
     var themHanhKhach = function(maDatCho, danhXung, ho, ten, dienThoai, quocTich) {
     	$http({
@@ -184,21 +239,31 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
                 	'quocTich' : quocTich
                 }
             }).then(function successCallback(response) {
-                console.log('success');
+                console.log('themHanhKhach success');
                 console.log(response.data);
                 
             }, function errorCallback(response) {
-                console.log('failed');
+                console.log('themHanhKhach failed');
             });
     }
 
 
-   
-    laySanBayDi();
-    var sbdi = 'SGN';
-    laySanBayDen(sbdi);
-    timChuyenBay('SGN', 'BMT', '22-10-2016', 4);
-    console.log($scope.flights);
+	//TEST   
+    // laySanBayDi();
+    // console.log($scope.sanBayDi);
+    // var sbdi = 'SGN';
+    // laySanBayDen(sbdi);
+    // console.log($scope.sanBayDen);
+    // timChuyenBay1('SGN', 'BMT', '22-10-2016', 4);
+    // console.log($scope.flights);
+    // timChuyenBay2('SGN', 'BMT', '22-10-2016');
+    // console.log($scope.flights);
+    // timChuyenBay3('SGN', 'BMT');
+    // console.log($scope.flights);
+    // timChuyenBay4('BL327');
+    // console.log($scope.flights);
+
+    themHanhKhach('ABCXYZ', 'Ong', 'Dang', 'ThanhDanh', '1234',  'Viet Nam');
 
 
 	
