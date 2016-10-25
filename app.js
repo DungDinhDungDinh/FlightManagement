@@ -7,9 +7,9 @@ app.use(express.static('client'));
 
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://dungdinh:tthuyddung218@ds053136.mlab.com:53136/flight_management');
+//mongoose.connect('mongodb://dungdinh:tthuyddung218@ds053136.mlab.com:53136/flight_management');
 
-//mongoose.connect('mongodb://localhost/FlightManagement');
+mongoose.connect('mongodb://localhost/FlightManagement');
 
 
 var Flight = require('./models/flight');
@@ -410,76 +410,20 @@ app.get('/api/flights', function(req, res) {
     }
 });
 
-app.post('/api/bookings', function(req, res) {
-    var maChuyenBay = req.body.maChuyenBay;
-    var hang = req.body.hang;
-    var soGheDat = req.body.soGheDat;
-    var ngayDatCho = req.body.ngayDatCho;
-    var tongTien =0;
-
-    //Kiem _ma lon nhat
-    var max = 100000;
-   	Booking.find().sort({_maDatCho:-1}).select('_maDatCho -_id').limit(1).exec(function(err, number) {
-
-   		if (number.length == 0) {
-   			max = 100000;
-   		} else {
-   			max = number[0]._maDatCho +1;
-   		}
-            
-    });
-
-
-    console.log(max);
-
-    Flight.findOne({
-                _ma: maChuyenBay,
-                _hang: hang
-            })
-            .select('_giaVe -_id').exec(function(err, flight) {
-        
-            tongTien = flight._giaVe*soGheDat;
-            max= max;
-
-            //Them dat cho
-            var b = new Booking({
-                _maDatCho: max,
-                _thoiGianDatCho: ngayDatCho,
-                _tongTien: tongTien,
-                _trangThai: 1
-            });
-
-            b.save(function(err, b) {
-                if (err) {
-                    res.status(400).send({
-                        'error': 'Bad request (The data is invalid)'
-                    });
-                    return console.error(err);
-                } else {
-                    Booking.find(function(err, bookings) {
-                        res.status(201).send({
-                            'messege': 'Created',
-                            'data' : b
-                        });
-                    });
-                }
-            });
-    });
-
-});
-
 
 app.post('/api/bookings', function(req, res) {
     var maChuyenBay = req.body.maChuyenBay;
     var hang = req.body.hang;
     var soGheDat = req.body.soGheDat;
+    var ngayDi = req.body.ngayDi;
+
     var danhXung = req.body.danhXung;
     var ho = req.body.ho;
     var ten = req.body.ten;
     var dienThoai = req.body.dienThoai;
     var quocTich = req.body.quocTich;
 
-    var ngayDatCho = req.body.ngayDatCho;
+    
     var tongTien =0;
 
     //Kiem _ma lon nhat
@@ -492,17 +436,28 @@ app.post('/api/bookings', function(req, res) {
 
     Flight.findOne({
                 _ma: maChuyenBay,
-                _hang: hang
-            })
-            .select('_giaVe -_id').exec(function(err, flight) {
-        
+                _hang: hang,
+                _ngayDi : ngayDi
+            }).exec(function(err, flight) {
+            console.log(flight);
+
+            flight._soGhe -= soGheDat;
+            flight.save(function(err, b) {
+                if (err) {
+                    console.log(err);
+                } else {
+
+                }
+            });
+
+
             tongTien = flight._giaVe*soGheDat;
             max= max + 1;
 
             //Them dat cho
             var b = new Booking({
                 _maDatCho: max,
-                _thoiGianDatCho: ngayDatCho,
+                _thoiGianDatCho: new Date().toString(),
                 _tongTien: tongTien,
                 _trangThai: 1
             });
@@ -539,11 +494,11 @@ app.post('/api/bookings', function(req, res) {
                     });
                     return console.error(err);
                 } else {
-                    Passenger.find(function(err, passengers) {
-                        res.status(201).send({
-                            'messege': 'Created'
-                        });
-                    });
+                    //Passenger.find(function(err, passengers) {
+                        // res.status(201).send({
+                        //     'messege': 'Created'
+                        // });
+                    //});
                 }
             });
     });

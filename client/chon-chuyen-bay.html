@@ -28,7 +28,11 @@
          	<hr>
         </div>
         
-        <div class="center-tab">
+        <div class="center-tab" ng-app="myApp" ng-controller="myCtrl">
+        <div ng-repeat="flight in flights">
+            {{flight._ma}} |  {{flight._noiDi}} |  {{flight._noiDen}} |  {{flight._ngayDi}} |  {{flight._hang}} |  {{flight._soGhe}} |  {{flight._giaVe}} 
+            <button> Đặt vé </button>
+        </div>
 			<p>	Đổ dữ liệu ở đây </p>
             
             <div class="tab-1">

@@ -14,6 +14,9 @@ var airPortSchema = mongoose.Schema({
 	_diaDanh:{
 		type:String,
 		required: true
+	},
+	_tenSanBay: {
+		type:String,
 	}
 });
 
@@ -21,12 +24,3 @@ var airPortSchema = mongoose.Schema({
 var Airport = mongoose.model('Airport',airPortSchema);
 
 module.exports = Airport;
-
-
-[
-	{	
-		"_ma" : '...',
-		"_nhomSanBay" : "...",
-		'_diaDanh' : '....'
-	}
-]

@@ -1,11 +1,17 @@
 
-angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
+var myapp = angular.module('myApp',[]);
+
+myapp.service('Data',function() {
+    this.test = 'abce';
+});
+
+myapp.controller('myCtrl', function($scope, $http, Data){
 	$scope.number_value1 = ["1", "2", "3", "4", "5", "6"];
 	$scope.number_value2 = ["0", "1", "2"];
 	$scope.number_value3 = ["0", "1"];
 	$scope.danh_xung = ["Ông", "Bà"];
-	
-	
+
+    console.log(Data.test);
 	$scope.chieu1 = function() 
     {
 		 $scope.style1 = {backgroundColor: '#337ab7'};
@@ -105,6 +111,7 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
     $scope.flights = [];
 
 	
+
 	$scope.chonNoiDi = function(selectedNoidi)
 	{
 		//$scope.sanBayDen = [selectedNoidi];
@@ -133,6 +140,7 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
 
             });
     };
+
 
    var laySanBayDen = function(noiDi) {
          $http({
@@ -233,12 +241,16 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
     }
 
 
-    var themHanhKhach = function(maDatCho, danhXung, ho, ten, dienThoai, quocTich) {
+    var datCho = function(maChuyenBay, hang, soGheDat, ngayDi,
+    						danhXung, ho, ten, dienThoai, quocTich) {
     	$http({
                 method: 'POST',
-                url: '/api/passengers',
+                url: '/api/bookings',
                 data : {
-                	'maDatCho' : maDatCho,
+                	'maChuyenBay' : maChuyenBay,
+                	'hang' : hang,
+                	'soGheDat' : soGheDat,
+                	'ngayDi' : ngayDi,
                 	'danhXung' : danhXung,
                 	'ho' : ho,
                 	'ten' : ten,
@@ -254,14 +266,16 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
             });
     }
 
-	
+
+
+	datCho('BL327', 'C1', 4, '22-10-2016', 'danhXung', 'ho', 'ten', 'dienThoai', 'quocTich');
 
 	//TEST   
 	//$scope.laySanBayDi();
     //console.log($scope.sanBayDi);
-      var sbdi = 'SGN';
-     laySanBayDen(sbdi);
-     console.log($scope.sanBayDen);
+     //  var sbdi = 'SGN';
+     // laySanBayDen(sbdi);
+     // console.log($scope.sanBayDen);
     // timChuyenBay1('SGN', 'BMT', '22-10-2016', 4);
     // console.log($scope.flights);
     // timChuyenBay2('SGN', 'BMT', '22-10-2016');
@@ -272,6 +286,7 @@ angular.module('myApp',[]).controller('myCtrl', function($scope, $http){
     // console.log($scope.flights);
 
     //themHanhKhach('ABCXYZ', 'Ong', 'Dang', 'ThanhDanh', '1234',  'Viet Nam');
+
 
 });
 
