@@ -267,6 +267,13 @@ hr {
 	font-size:16px;
 }
 
+.btn-tim-kiem:hover
+{
+	background-image:none;
+	background-color:#F90;
+	color: #FFF;
+}
+
 .clear {
 	clear:both;
 }
