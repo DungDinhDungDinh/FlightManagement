@@ -7,9 +7,7 @@ app.use(express.static('client'));
 
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://dungdinh:tthuyddung218@ds053136.mlab.com:53136/flight_management');
-
-//mongoose.connect('mongodb://localhost/FlightManagement');
+mongoose.connect('mongodb://localhost/FlightManagement');
 
 
 var Flight = require('./models/flight');
