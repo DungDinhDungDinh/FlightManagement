@@ -2,12 +2,13 @@
 
   <script>
   $( function() {
-    var dateFormat = "mm-dd-yyyy",
+    var dateFormat = 'dd-mm-yy',
       from = $( "#from" )
         .datepicker({
           defaultDate: "+1w",
           changeMonth: true,
-          numberOfMonths: 2
+          numberOfMonths: 2,
+          dateFormat: dateFormat
         })
         .on( "change", function() {
           to.datepicker( "option", "minDate", getDate( this ) );
@@ -15,7 +16,8 @@
       to = $( "#to" ).datepicker({
         defaultDate: "+1w",
         changeMonth: true,
-        numberOfMonths: 2
+        numberOfMonths: 2,
+        dateFormat: dateFormat
       })
       .on( "change", function() {
         from.datepicker( "option", "maxDate", getDate( this ) );
@@ -75,9 +77,9 @@
             
             <div class="tab-1">
               <p class="text"> Ngày đi: </p>
-                <input type="text" ng-model="selectedNgaydi" class="daytime" id="from" name="from" placeholder="dd/mm/yyyy" ng-model="date"/>
+                <input type="text" ng-model="selectedNgaydi" class="daytime" id="from" name="from" placeholder="dd-mm-yyyy" ng-model="date"/>
                 <p class="text" ng-show="show"> Ngày về: </p>
-                <input type="text" ng-model="selectedNgayve" ng-show="show" class="daytime" id="to" name="to" placeholder="dd/mm/yyyy" readonly="true"/>
+                <input type="text" ng-model="selectedNgayve" ng-show="show" class="daytime" id="to" name="to" placeholder="dd-mm-yyyy" readonly="true"/>
             </div>
             
             <div class="tab-1">

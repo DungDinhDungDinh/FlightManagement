@@ -48,14 +48,34 @@
                                 <tbody>
                                     <tr ng-repeat="flight in flights">
                                         <td>
-                                            <input type="radio" ng-model="flight.selected"/></td>
+                                            <input type="radio" ng-model="flight.selected"/>
+                                        </td>
                                         <td>
-                                            <input type="text" class="form-control" ng-model="flight._ma" readonly required/></td>
+                                            <input type="text" class="form-control" ng-model="flight._ma" readonly required/>
+                                        </td>
                                         <td>
-                                            <input type="text" class="form-control" ng-model="flight._hang" readonly required/></td>
+                                            <input type="text" class="form-control" ng-model="flight._noiDi" readonly required/>
+                                        </td>
                                         <td>
-                                            <input type="text" class="form-control" ng-model="flight._giaVe" readonly required/></td>
-                                        <td>                                  
+                                            <input type="text" class="form-control" ng-model="flight._noiDen" readonly required/>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="flight._ngayDi" readonly required/>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="flight._gioDi" readonly required/>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="flight._hang" readonly required/>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="flight._soGhe" readonly required/>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="flight._giaVe" readonly required/>
+                                        </td>
+                                        
+
                                     </tr>
                                 </tbody>
                             </table>

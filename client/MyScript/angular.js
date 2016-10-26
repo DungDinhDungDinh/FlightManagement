@@ -231,7 +231,10 @@ myapp.controller('myCtrl',  ['$scope', '$http', 'Data', '$location', function ($
 
 myapp.controller('chonChuyenBayCtrl',  ['$scope', '$http', 'Data', '$location', function ($scope, $http, Data, $location) {
 
+	console.log(Data.noiDi);
+	console.log(Data.noiDen);
 	console.log(Data.ngayDi);
+	console.log(Data.soNguoi);
 
 	$scope.timChuyenBay1 = function(noiDi, noiDen, ngayDi, soNguoi) {
     	$http({
