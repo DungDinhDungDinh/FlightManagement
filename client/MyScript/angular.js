@@ -4,7 +4,7 @@ var myapp = angular.module('myApp',['ngRoute']);
 
 myapp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
-      when('/home', {
+      when('/', {
         templateUrl: './home.html',
         controller: 'myCtrl'
       }).
@@ -12,8 +12,12 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './chon-chuyen-bay.html',
         controller: 'chonChuyenBayCtrl'
       }).
+      when('/nhap-thong-tin-khach', {
+        templateUrl: './nhap-thong-tin-khach.html',
+        controller: 'thongTinKhachHangCtrl'
+      }).
       otherwise({
-        redirectTo: '/home'
+        redirectTo: '/'
       });
   }]);
 
@@ -226,7 +230,8 @@ myapp.controller('myCtrl',  ['$scope', '$http', 'Data', '$location', function ($
         				  parseInt($scope.selectedNumber3, 10);
   
        $location.path('/chon-chuyen-bay');
-   }
+   };
+   
 }]);
 
 myapp.controller('chonChuyenBayCtrl',  ['$scope', '$http', 'Data', '$location', function ($scope, $http, Data, $location) {
@@ -256,7 +261,37 @@ myapp.controller('chonChuyenBayCtrl',  ['$scope', '$http', 'Data', '$location', 
             });
     };
 
+
+       $scope.selectedFlight;
+       $scope.flight = {};
+       $scope.flight.selected = {};
+        //Chọn chuyến bay
+    $scope.chonChuyenBay = function() {
+        angular.forEach($scope.flights, function(selected) {
+            if (selected.selected) {
+                $scope.selectedFlight = selected;
+                      Data.maChuyenBay = $scope.selectedFlight._ma;
+        Data.hang = $scope.selectedFlight._hang;;
+
+        $location.path('/nhap-thong-tin-khach');
+
+            }
+        });
+        console.log($scope.selectedFlight);
+  
+    };
+
     $scope.flights = [];
     $scope.timChuyenBay1(Data.noiDi, Data.noiDen, Data.ngayDi, Data.soNguoi);
+
+    //Bien check radio-button
+    $scope.checked = false;
+
+}]);
+
+
+myapp.controller('thongTinKhachHangCtrl',  ['$scope', '$http', 'Data', '$location', function ($scope, $http, Data, $location) {
+	
+	console.log(Data.hang);
 
 }]);
