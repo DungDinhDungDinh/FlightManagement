@@ -4,16 +4,17 @@
     var dateFormat = 'dd-mm-yy',
       from1 = $( "#from1" )
         .datepicker({
-          defaultDate: "+1w",
+          defaultDate: "",
           changeMonth: true,
           numberOfMonths: 2,
+		  minDate: 0,
           dateFormat: dateFormat
         })
         .on( "change", function() {
           to.datepicker( "option", "minDate", getDate( this ) );
         }),
       to = $( "#to" ).datepicker({
-        defaultDate: "+1w",
+        defaultDate: "",
         changeMonth: true,
         numberOfMonths: 2,
         dateFormat: dateFormat
@@ -42,13 +43,13 @@
     	<div style="background-color:#FFF">
         
             <div class="head-tab">
-                <!-- <a class="mua-ve" href="index.html"> -->
+                <a class="mua-ve">
                     <div class="tab" ng-click="muaVeTrucTuyen()">Mua vé trực tuyến</div>
-                <!-- </a> -->
+                </a>
                 
-                <!-- <a class="mua-ve" href="thong-tin-chuyen-bay-1.html"> -->
+                <a class="mua-ve">
                     <div class="tab-chosen" ng-click="thongTinChuyenBay()">Thông tin chuyến bay</div>
-                <!-- </a>            -->
+                </a>
             </div>
         
             <div class="tim-chuyen-bay-tab">
