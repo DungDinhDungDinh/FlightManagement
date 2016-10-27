@@ -345,3 +345,29 @@ hr {
 	background-size: 50px auto;
 	background-position: 5px center ;
 }
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 15px;
+}
+
+th {
+background-color: #337ab7;
+}
+
+table {
+	margin-left:70px;
+	
+}
+
+.selected {
+  background-color: red;
+}
+
+.rowtb:hover{
+	background-color: #6FF;
+}
+

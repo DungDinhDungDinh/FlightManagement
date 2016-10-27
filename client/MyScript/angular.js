@@ -270,11 +270,13 @@ myapp.controller('myCtrl',  ['$scope', '$http', 'Data', '$location', '$rootScope
    };
 
   	$scope.muaVeTrucTuyen = function () {
+		console.log('timChuyenBay2 success');
   		$location.path('/');
   	}
 
-  	$scope.thongtinChuyenBay = function () {
-  		$location.path('/thong-tin-chuyen-bay1');
+  	$scope.thongTinChuyenBay = function () {
+		console.log('timChuyenBay1 success');
+  		$location.path('/thong-tin-chuyen-bay-1');
   	}
    
 }]);
