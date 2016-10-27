@@ -71,6 +71,7 @@
                     <col width="80">
                     <tr>              
                         <th>Mã chuyến bay</th>
+                        <th>Ngày đi</th>
                         <th>Giờ xuất hành</th>
                         <th>Hạng</th>
                         <th>Giá vé</th>
@@ -79,6 +80,9 @@
                     <tr class="rowtb" ng-repeat="flight in backFlights" ng-click="setSelected(flight)" ng-class="{selected: flight._hang === idSelectedHang}">                      
                         <td>
                             <label for="MyField">{{flight._ma}}</label>       
+                        </td>
+                        <td>
+                            <label for="MyField">{{flight._ngayDi}}</label>
                         </td>
                         <td>
                             <label for="MyField">{{flight._gioDi}}</label>
