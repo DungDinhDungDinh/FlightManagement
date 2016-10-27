@@ -2,13 +2,13 @@
 	<div class="main" ng-controller="chonChuyenBayCtrl">
         <div class="sub-main" style="background-color:#F3F3F3; font-family:Arial, Verdana, sans-serif;">
             <div class="head-tab">
-                   <!-- <a class="mua-ve">      -->
+                   <a class="mua-ve">
                         <div class="tab-chosen" ng-click="muaVeTrucTuyen()">Mua vé trực tuyến</div>
-                    <!-- </a> -->
+                    </a>
                     
-                    <!-- <a class="mua-ve"> -->
+                    <a class="mua-ve">
                         <div class="tab" ng-click="thongTinChuyenBay()">Thông tin chuyến bay</div>
-                    <!-- </a> -->
+                    </a>
             </div>
               
             <div class="tim-chuyen-bay-tab">
@@ -21,14 +21,14 @@
       
         <div class="center-tab" style="font-family:Arial, Verdana, sans-serif;">
 
-        <h3> Chuyến bay đi </h3>
+        <h3 class="pleft3"> Chuyến bay đi </h3>
             
             <table >
             	<col width="150">
   				<col width="150">
-                <col width="250">
+                <col width="150">
+  				<col width="120">
   				<col width="150">
-  				<col width="80">
                 <tr>              
                     <th>Mã chuyến bay</th>
                     <th>Ngày đi</th>
@@ -60,9 +60,9 @@
                 </tr>
             </table>
 
-            <hr/>
+            <hr style="margin-top:30px;"/>
             <div ng-show="khuHoi">
-            <h3> Chuyến bay về </h3>
+            <h3 class="pleft3"> Chuyến bay về </h3>
                 <table >
                     <col width="150">
                     <col width="150">
