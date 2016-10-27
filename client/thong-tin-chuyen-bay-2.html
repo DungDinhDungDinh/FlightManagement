@@ -34,16 +34,16 @@
             
             <div class="tab-1">
             	<p class="text"> Khởi hành: </p>
-                <select class="input-from" ng-model="khoihanh" ng-init="laySanBayDi()"  ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDi " ng-change="chonNoiDi(khoihanh)">
+                <select class="input-from" ng-model="selectedNoidi" ng-init="laySanBayDi()"  ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDi " ng-change="chonNoiDi(selectedNoidi)">
             	</select> 
                 
                 <p class="text clear"> Kết thúc: </p>
-                <select class="input-from" ng-model="ketthuc" ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDen " ng-change=""> 
+                <select class="input-from" ng-model="selectedNoiden" ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDen " ng-change=""> 
                 </select>
             </div>
                   
             <div class="tab-1 clear">
-            		<button type="button" ng-model="btnTimCB2" class="btn-tim-kiem" ng-click="checkEx2()">Tìm chuyến bay</button>
+            		<button type="button" ng-model="btnTimCB2" class="btn-tim-kiem" ng-click="timChuyenBay()">Tìm chuyến bay</button>
             </div>
         </div>
     </div>

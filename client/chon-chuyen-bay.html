@@ -2,13 +2,13 @@
 	<div class="main" ng-controller="chonChuyenBayCtrl">
         <div class="sub-main" style="background-color:#F3F3F3; font-family:Arial, Verdana, sans-serif;">
             <div class="head-tab">
-                    <a class="mua-ve" href="index.html">
-                        <div class="tab-chosen">Mua vé trực tuyến</div>
-                    </a>
+                   <!-- <a class="mua-ve">      -->
+                        <div class="tab-chosen" ng-click="muaVeTrucTuyen()">Mua vé trực tuyến</div>
+                    <!-- </a> -->
                     
-                    <a class="mua-ve" href="thong-tin-chuyen-bay-1.html">
-                        <div class="tab">Thông tin chuyến bay</div>
-                    </a>
+                    <!-- <a class="mua-ve"> -->
+                        <div class="tab" ng-click="thongTinChuyenBay()">Thông tin chuyến bay</div>
+                    <!-- </a> -->
             </div>
               
             <div class="tim-chuyen-bay-tab">
@@ -31,6 +31,7 @@
   				<col width="80">
                 <tr>              
                     <th>Mã chuyến bay</th>
+                    <th>Ngày đi</th>
                     <th>Giờ xuất hành</th>
                     <th>Hạng</th>
                     <th>Giá vé</th>
@@ -39,6 +40,9 @@
                 <tr class="rowtb" ng-repeat="flight in flights" ng-click="setSelected(flight)" ng-class="{selected: flight._hang === idSelectedHang}">                      
                     <td>
                     	<label for="MyField">{{flight._ma}}</label>       
+                    </td>
+                    <td>
+                        <label for="MyField">{{flight._ngayDi}}</label>       
                     </td>
                     <td>
                     	<label for="MyField">{{flight._gioDi}}</label>

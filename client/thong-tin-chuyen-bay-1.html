@@ -72,15 +72,15 @@
             
             <div class="tab-1">
                 <p class="text"> Khởi hành: </p>
-                <select class="input-from" ng-model="khoihanh" ng-init="laySanBayDi()"  ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDi " ng-change="chonNoiDi(khoihanh)">
+                <select class="input-from" ng-model="selectedNoidi" ng-init="laySanBayDi()"  ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDi " ng-change="chonNoiDi(selectedNoidi)">
             	</select> 
                 
                 <p class="text clear"> Kết thúc: </p>
-                <select class="input-from" ng-model="ketthuc" ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDen " ng-change=""> 
+                <select class="input-from" ng-model="selectedNoiden" ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDen " ng-change=""> 
                 </select>
                 
                 <p class="text clear"> Ngày đi: </p>
-                <input type="text" class="daytime" ng-model="ngaydi" id="from1" name="from1" placeholder="dd/mm/yyyy"/>
+                <input type="text" class="daytime" ng-model="selectedNgaydi" id="from1" name="from1" placeholder="dd/mm/yyyy"/>
             </div>
                   
             <div class="tab-1 clear">
