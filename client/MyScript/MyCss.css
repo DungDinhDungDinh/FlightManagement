@@ -2,6 +2,7 @@ body {
 	background-image:url(../image/airplane.jpg);
 	background-size: 100% auto;
 	background-repeat: no-repeat;
+	background-attachment: fixed;
 }
 
 .btn-primary{
@@ -9,16 +10,32 @@ body {
 }
 .container{
   margin: 20px 0;
+  
+}
+
+.pleft {
+	margin-left: 100px;
+}
+
+.pleft2 {
+	margin-left: 97px;
 }
 
 .main {
-	background: #FFF;
+	background-color: #F0F0F0;
 	margin-top: 30px;
-	margin-left: 200px;
-	margin-right: 200px;
+
 	height: auto;
 	width: auto;
 	border-radius: 25px;	
+	
+	display: inline-block;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    width: 960px;
+    margin: auto;
 }
 hr {
 	margin: 0;
@@ -86,14 +103,14 @@ hr {
 	margin-right: 2px;
 	float: left;
 	font-size: 17px;
-	background-color:#F3F3F3;	
+	background-color:#FFF;	
 	font-family:Arial, Verdana, sans-serif;
 }
 
 .tab2 {
 	padding-left: 60px;
 	height: 50px;
-	width: 170px;
+	width: 258px;
 	float: left;
 	background-color:#FFF;
 	border-style: solid;
@@ -104,10 +121,27 @@ hr {
 .tab2-chosen {
 	padding-left: 60px;
 	height: 50px;
-	width: 170px;
+	width: 258px;
 	float: left;
 	background-color: #6CF;
+	border-style: solid;
 	border-width: 1px;
+	border-color: #FC3;
+}
+
+.color1 {
+	background-color: #FC3;
+	border-color: #FC3;
+}
+
+.color2 {
+	background-color: #6CF;
+	border-color: #6CF;
+}
+
+.color3 {
+	background-color: #3F0;
+	border-color: #6CF;
 }
 
 .tab3 {
@@ -116,7 +150,7 @@ hr {
 	width: 200px;
 	float: left;	
 	font-size: 17px;
-	background-color:#F3F3F3;
+	background-color:#FFF;
 	font-family:Arial, Verdana, sans-serif;
 }
 
@@ -126,8 +160,8 @@ hr {
 	width: 200px;
 	float: left;
 	border-width: 1px;
-	border-bottom-color: #FFF;
-	background-color:#FFF;	
+	border-bottom-color: ##F0F0F0;
+	background-color:#F0F0F0;	
 	font-family:Arial, Verdana, sans-serif;
 }
 
@@ -175,32 +209,35 @@ hr {
 }
 
 .input-from {
-
 	float: left;
 	padding-left: 5px;
 	margin-top: 10px;
 	margin-right: 20px;
 	height: 40px;
-	width: 200px;
+	width: 207px;
 	border-radius: 5px;
 	line-height: 30px;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #666;
+	border-color: #999;
 }
 
 .daytime {
+	background-image: url(../image/icon-calendar.svg);
+	background-repeat: no-repeat;
+	background-size: 20px auto;
+	background-position: 180px center ;
 	padding-left: 5px;
 	margin-top: 10px;
 	margin-right: 20px;
 	float: left;
-	height: 40px;
+	height: 38px;
 	width: 200px;
 	border-radius: 5px;
 	line-height: 40px;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #666;
+	border-color: #999;
 }
 
 .number {
@@ -214,7 +251,7 @@ hr {
 	line-height: 30px;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #666;
+	border-color: #999;
 }
 
 .input-normal {
@@ -228,7 +265,7 @@ hr {
 	line-height: 30px;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #666;
+	border-color: #999;
 }
 
 .input-gioi-tinh {
