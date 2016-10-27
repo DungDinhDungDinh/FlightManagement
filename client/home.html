@@ -2,11 +2,11 @@
 
   <script>
   $( function() {
-    //var dateToday = new Date();
-    //minDate: dateToDate
     var dateFormat = 'dd-mm-yy',
       from = $( "#from" )
         .datepicker({
+          defaultDate: "",
+		  minDate: 0,
           changeMonth: true,
           numberOfMonths: 2,
           dateFormat: dateFormat
@@ -15,6 +15,7 @@
           to.datepicker( "option", "minDate", getDate( this ) );
         }),
       to = $( "#to" ).datepicker({
+        defaultDate: "",
         changeMonth: true,
         numberOfMonths: 2,
         dateFormat: dateFormat
@@ -39,22 +40,20 @@
 
 
 <div>
-  <div class="main" ng-controller="myCtrl">
-
-      <div class="sub-main" style="background-color:#F3F3F3; font-family:Arial, Verdana, sans-serif;" >
+	<div class="main" ng-controller="myCtrl">
+    	<div class="sub-main" style="background-color:#FFF; font-family:Arial, Verdana, sans-serif;" >
             <div class="head-tab">
-                    <a  class="tab-chosen"> 
-                    <div class="mua-ve" ng-click='muaVeTrucTuyen()' >Mua vé trực tuyến</div>
+                    <a class="mua-ve" href="index.html">
+                        <div class="tab-chosen">Mua vé trực tuyến</div>
                     </a>
-                       
-                    <a class="tab" > 
-                    <div class="mua-ve" ng-click='thongTinChuyenBay()'>Thông tin chuyến bay</div>
+                    
+                    <a class="mua-ve" href="thong-tin-chuyen-bay-1.html">
+                        <div class="tab">Thông tin chuyến bay</div>
                     </a>
-                       
             </div>
                   
             <div class="tim-chuyen-bay-tab">
-                <div class="tab2-chosen number1"> Tìm chuyến bay</div>
+                <div class="tab2-chosen number1 color1"> Tìm chuyến bay</div>
                 <div class="tab2 number2"> Lựa chọn chuyến bay</div>
                 <div class="tab2 number3"> Thông tin hành khách</div>
             </div>
@@ -62,40 +61,42 @@
         </div>
         
         <div class="center-tab" style="font-family:Arial, Verdana, sans-serif;">
-            <div class="tab-1"  ng-init="chieu1()">                         
+            <div class="tab-1 pleft2"  ng-init="chieu1()">                         
               <div  class="mot-chieu" ng-style="style1" ng-click="chieu1()"> Một chiều </div> 
               <div  class="mot-chieu" ng-style="style2" ng-click="chieu2()"> Khứ hồi </div>   
             </div>
                     
-            <div class="tab-1">
+            <div class="tab-1 pleft">
               <p class="text"> Khởi hành: </p>
-                <select class="input-from" ng-model="selectedNoidi" ng-init="laySanBayDi()"  ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDi " ng-change="chonNoiDi(selectedNoidi)">
+                <select class="input-from " ng-model="selectedNoidi" ng-init="laySanBayDi()"  ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDi " ng-change="chonNoiDi(selectedNoidi)">
               </select> 
                 <p class="text"> Kết thúc: </p>
                 <select class="input-from" ng-model="selectedNoiden" ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDen " ng-change=""> 
                 </select> 
             </div>
             
-            <div class="tab-1">
-              <p class="text"> Ngày đi: </p>
-                <input type="text" ng-model="selectedNgaydi" class="daytime" id="from" name="from" placeholder="dd-mm-yyyy" ng-model="date"/>
+            <div class="tab-1 pleft">
+                <p class="text"> Ngày đi: </p>
+              	<input type="text" ng-model="selectedNgaydi" class="daytime" id="from" name="from" placeholder="dd-mm-yyyy" readonly="true"/>
+        
                 <p class="text" ng-show="show"> Ngày về: </p>
                 <input type="text" ng-model="selectedNgayve" ng-show="show" class="daytime" id="to" name="to" placeholder="dd-mm-yyyy" readonly="true"/>
             </div>
             
-            <div class="tab-1">
+            <div class="tab-1 pleft">
             
               <p class="text"> Người lớn: </p>
                 <select class="input-normal input-gioi-tinh" ng-init="selectedNumber1 = number_value1[0]" ng-model="selectedNumber1" ng-options="item1 for item1 in number_value1" ng-change="checkNumber1(selectedNumber1)">
               </select>        
                 
-                <p class="text" style="width: 140px;"> Trẻ em (dưới 2 tuổi): </p>
+                <p class="text"> Trẻ sơ sinh: </p>
                 <select class="input-normal input-gioi-tinh" ng-init="selectedNumber2 = number_value2[0]" ng-model="selectedNumber2" ng-options="item2 for item2 in number_value2" ng-change="checkNumber2(selectedNumber2)">
               </select>
                 
-                <p class="text" style="width: 150px;"> Trẻ em (2 đến 12 tuổi): </p>
+                <p class="text"> Trẻ nhỏ: </p>
                 <select class="input-normal input-gioi-tinh" ng-init="selectedNumber3 = number_value3[0]" ng-model="selectedNumber3" ng-options="item3 for item3 in number_value3" >
               </select> 
+
 
             </div>
             
