@@ -1,46 +1,31 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Flight Management</title>
-<link rel="shortcut icon" href="image/FlightTrack-icon.png" type="image/png"/>
-<link href="MyScript/MyCss.css" rel="stylesheet" type="text/css" />
-<script src="MyScript/angular.min.js"></script>
-<script src="MyScript/angular.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css"/>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-</head>
 
-<body>
-<div ng-app="myApp">
-	<div class="main" ng-controller="myCtrl" >
+<div>
+	<div class="main">
     	<div style="background-color:#FFF">
             <div class="head-tab">
-                <a class="mua-ve" href="index.html">
-                    <div class="tab">Mua vé trực tuyến</div>
-                </a>
+                <!-- <a class="mua-ve" href="index.html"> -->
+                    <div class="tab" ng-click="muaVeTrucTuyen()">Mua vé trực tuyến</div>
+                <!-- </a> -->
                 
-                <a class="mua-ve" href="thong-tin-chuyen-bay-1.html">
-                    <div class="tab-chosen">Thông tin chuyến bay</div>
-                </a>
+                <!-- <a class="mua-ve" href="thong-tin-chuyen-bay-1.html"> -->
+                    <div class="tab-chosen" ng-click="thongTinChuyenBay()">Thông tin chuyến bay</div>
+                <!-- </a> -->
             </div>
         
             <div class="tim-chuyen-bay-tab">
             	<a class="mua-ve">
-                    <a class="mua-ve" href="thong-tin-chuyen-bay-1.html">
-                        <div class="tab3">Tìm theo lịch bay</div>
-                    </a>
+                    <!-- <a class="mua-ve" href="thong-tin-chuyen-bay-1.html"> -->
+                        <div class="tab3" ng-click="thongTinChuyenBay()">Tìm theo lịch bay</div>
+                    <!-- </a> -->
                     
-                    <a class="mua-ve">
-                        <div class="tab3-chosen">Tìm theo sân bay</div>
-                    </a>
+                    <!-- <a class="mua-ve"> -->
+                        <div class="tab3-chosen" ng-click="thongTinChuyenBay2()">Tìm theo sân bay</div>
+                    <!-- </a> -->
                     
-                    <a class="mua-ve" href="thong-tin-chuyen-bay-3.html">
-                        <div class="tab3">Tìm theo mã chuyến bay</div>
-                    </a>    
+                    <!-- <a class="mua-ve" href="thong-tin-chuyen-bay-3.html"> -->
+                        <div class="tab3" ng-click="thongTinChuyenBay3()">Tìm theo mã chuyến bay</div>
+                    <!-- </a>     -->
             	</a>
         	</div>	
         </div>
@@ -63,5 +48,3 @@
         </div>
     </div>
 </div>
-</body>
-</html>

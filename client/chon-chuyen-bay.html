@@ -20,6 +20,8 @@
         </div>
       
         <div class="center-tab" style="font-family:Arial, Verdana, sans-serif;">
+
+        <h3> Chuyến bay đi </h3>
             
             <table >
             	<col width="150">
@@ -53,6 +55,43 @@
                     </td>
                 </tr>
             </table>
+
+            <hr/>
+            <div ng-show="khuHoi">
+            <h3> Chuyến bay về </h3>
+                <table >
+                    <col width="150">
+                    <col width="150">
+                    <col width="250">
+                    <col width="150">
+                    <col width="80">
+                    <tr>              
+                        <th>Mã chuyến bay</th>
+                        <th>Giờ xuất hành</th>
+                        <th>Hạng</th>
+                        <th>Giá vé</th>
+                        <th>Chọn</th>
+                    </tr>
+                    <tr class="rowtb" ng-repeat="flight in backFlights" ng-click="setSelected(flight)" ng-class="{selected: flight._hang === idSelectedHang}">                      
+                        <td>
+                            <label for="MyField">{{flight._ma}}</label>       
+                        </td>
+                        <td>
+                            <label for="MyField">{{flight._gioDi}}</label>
+                        </td>
+                        <td>
+                            <label for="MyField">{{flight._hang}}</label>
+                        </td>
+                        <td>
+                            <label for="MyField">{{flight._giaVe}}</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="chuyenBay" ng-model="flight.selected" ng-value="flight";
+                          style="width: 50px" ng-checked="checked"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             
 
             <div class="tab-1">

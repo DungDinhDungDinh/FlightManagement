@@ -16,9 +16,17 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './nhap-thong-tin-khach.html',
         controller: 'thongTinKhachHangCtrl'
       }).
-      when('/thong-tin-chuyen-bay1', {
-        templateUrl: './thong-tin-chuyen-bay.html',
+      when('/thong-tin-chuyen-bay-1', {
+        templateUrl: './thong-tin-chuyen-bay-1.html',
         controller: 'thongTinChuyenBay1Ctrl'
+      }).
+       when('/thong-tin-chuyen-bay-2', {
+        templateUrl: './thong-tin-chuyen-bay-2.html',
+        controller: 'thongTinChuyenBay2Ctrl'
+      }).
+        when('/thong-tin-chuyen-bay-3', {
+        templateUrl: './thong-tin-chuyen-bay-3.html',
+        controller: 'thongTinChuyenBay3Ctrl'
       }).
       otherwise({
         redirectTo: '/'
@@ -270,12 +278,10 @@ myapp.controller('myCtrl',  ['$scope', '$http', 'Data', '$location', '$rootScope
    };
 
   	$scope.muaVeTrucTuyen = function () {
-		console.log('timChuyenBay2 success');
   		$location.path('/');
   	}
 
   	$scope.thongTinChuyenBay = function () {
-		console.log('timChuyenBay1 success');
   		$location.path('/thong-tin-chuyen-bay-1');
   	}
    
@@ -388,13 +394,50 @@ myapp.controller('thongTinKhachHangCtrl',  ['$scope', '$http', 'Data', '$locatio
 }]);
 
 myapp.controller('thongTinChuyenBay1Ctrl',  ['$scope', '$http', 'Data', '$location', function ($scope, $http, Data, $location) {
-	
+
+    $scope.muaVeTrucTuyen = function () {
+        $location.path('/');
+    }
+
+    $scope.thongTinChuyenBay = function () {
+        $location.path('/thong-tin-chuyen-bay-1');
+    }
+     $scope.thongTinChuyenBay2 = function () {
+        $location.path('/thong-tin-chuyen-bay-2');
+    }
+     $scope.thongTinChuyenBay3 = function () {
+        $location.path('/thong-tin-chuyen-bay-3');
+    }
 }]);
 
 myapp.controller('thongTinChuyenBay2Ctrl',  ['$scope', '$http', 'Data', '$location', function ($scope, $http, Data, $location) {
-	
+	 $scope.muaVeTrucTuyen = function () {
+        $location.path('/');
+    }
+
+    $scope.thongTinChuyenBay = function () {
+        $location.path('/thong-tin-chuyen-bay-1');
+    }
+      $scope.thongTinChuyenBay2 = function () {
+        $location.path('/thong-tin-chuyen-bay-2');
+    }
+     $scope.thongTinChuyenBay3 = function () {
+        $location.path('/thong-tin-chuyen-bay-3');
+    }
 }]);
 
 myapp.controller('thongTinChuyenBay3Ctrl',  ['$scope', '$http', 'Data', '$location', function ($scope, $http, Data, $location) {
-	
+	 $scope.muaVeTrucTuyen = function () {
+        $location.path('/');
+    }
+
+    $scope.thongTinChuyenBay = function () {
+        $location.path('/thong-tin-chuyen-bay-1');
+    }
+      $scope.thongTinChuyenBay2 = function () {
+        $location.path('/thong-tin-chuyen-bay-2');
+    }
+     $scope.thongTinChuyenBay3 = function () {
+        $location.path('/thong-tin-chuyen-bay-3');
+    }
 }]);
