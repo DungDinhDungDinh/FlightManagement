@@ -73,8 +73,7 @@ Flight.find({
 
 app.get('/api/start_airports', function(req, res) {
 
-    Flight.find().distinct('_noiDi',function(err, flights) 
-    {
+    Flight.find().distinct('_noiDi', function(err, flights) {
         if (err)
             return console.error(err);
         else {
@@ -106,8 +105,7 @@ app.get('/api/dest_airports', function(req, res) {
     var ma = req.query.ma;
     Flight.find({
         _noiDi: ma
-    }).distinct('_noiDen',function(err, flights) 
-    {
+    }).distinct('_noiDen', function(err, flights) {
         if (err) {
             res.status(400).send({
                 'error': 'Bad request (The data is invalid)'
@@ -198,8 +196,8 @@ app.post('/api/passengers', function(req, res) {
         _danhXung: danhXung,
         _ho: ho,
         _ten: ten,
-        _dienThoai : dienThoai,
-        _quocTich : quocTich
+        _dienThoai: dienThoai,
+        _quocTich: quocTich
     });
 
     p.save(function(err, p) {
@@ -213,7 +211,7 @@ app.post('/api/passengers', function(req, res) {
                 console.log(passengers);
                 res.status(201).send({
                     'messege': 'Created',
-                    'data' : p
+                    'data': p
                 });
             });
         }
@@ -363,7 +361,7 @@ app.get('/api/flights', function(req, res) {
             }
         });
     } else if (paramsNumber == 3) {
-    	Flight.find({
+        Flight.find({
             _noiDi: maNoiDi,
             _noiDen: maNoiDen,
             _ngayDi: ngayDi,
@@ -380,7 +378,7 @@ app.get('/api/flights', function(req, res) {
             }
         });
     } else if (paramsNumber == 2) {
-    	Flight.find({
+        Flight.find({
             _noiDi: maNoiDi,
             _noiDen: maNoiDen,
         }).select('-_id').exec(function(err, flights) {
@@ -395,8 +393,8 @@ app.get('/api/flights', function(req, res) {
             }
         });
     } else if (paramsNumber == 1) {
-    	Flight.find({
-            _ma : maChuyenBay
+        Flight.find({
+            _ma: maChuyenBay
         }).select('-_id').exec(function(err, flights) {
             if (err) {
                 res.status(400).send({
@@ -413,10 +411,17 @@ app.get('/api/flights', function(req, res) {
 
 
 app.post('/api/bookings', function(req, res) {
-    var maChuyenBay = req.body.maChuyenBay;
-    var hang = req.body.hang;
+
+    var khuHoi = req.body.khuHoi;
+    console.log(khuHoi);
+    var maChuyenBayDi = req.body.maChuyenBayDi;
+    var hangDi = req.body.hangDi;
     var soGheDat = req.body.soGheDat;
     var ngayDi = req.body.ngayDi;
+
+    var maChuyenBayVe = req.body.maChuyenBayVe;
+    var hangVe = req.body.hangVe;
+    var ngayVe = req.body.ngayVe;
 
     var danhXung = req.body.danhXung;
     var ho = req.body.ho;
@@ -424,84 +429,128 @@ app.post('/api/bookings', function(req, res) {
     var dienThoai = req.body.dienThoai;
     var quocTich = req.body.quocTich;
 
-    
-    var tongTien =0;
+
+    var tongTien = 0;
 
     //Kiem _ma lon nhat
-    Booking.findOne().sort({_maDatCho:-1}).select('_maDatCho -_id').limit(1).exec(function(err, number) {
-            if(number._maDatCho == null || number._maDatCho == '' || number._maDatCho == undefined)
-                max = 100000;
-            else
-                max = number._maDatCho;
+    Booking.findOne().sort({
+        _maDatCho: -1
+    }).select('_maDatCho -_id').limit(1).exec(function(err, number) {
+        if (number == null || number._maDatCho == null || number._maDatCho == '' || number._maDatCho == undefined)
+            max = 100000;
+        else
+            max = number._maDatCho;
     });
 
     Flight.findOne({
-                _ma: maChuyenBay,
-                _hang: hang,
-                _ngayDi : ngayDi
-            }).exec(function(err, flight) {
-            console.log(flight);
+        _ma: maChuyenBayDi,
+        _hang: hangDi,
+        _ngayDi: ngayDi
+    }).exec(function(err, flight) {
+        console.log(flight);
 
-            flight._soGhe -= soGheDat;
-            flight.save(function(err, b) {
+        flight._soGhe -= soGheDat;
+        flight.save(function(err, b) {
+            if (err) {
+                console.log(err);
+            }
+        });
+
+
+        tongTien = flight._giaVe * soGheDat;
+        max = max + 1;
+
+        if (khuHoi) {
+            Flight.findOne({
+                _ma: maChuyenBayVe,
+                _hang: hangVe,
+                _ngayDi: ngayVe
+            }).exec(function(err, backFlight) {
+            backFlight._soGhe -= soGheDat;
+            backFlight.save(function(err, b) {
                 if (err) {
                     console.log(err);
-                } else {
-
                 }
-            });
+                console.log('tien x2');
+                tongTien += backFlight._giaVe * soGheDat;
+                //Them dat cho
+                var b = new Booking({
+                    _maDatCho: max,
+                    _thoiGianDatCho: new Date().toString(),
+                    _tongTien: tongTien,
+                    _trangThai: 1
+                });
 
-
-            tongTien = flight._giaVe*soGheDat;
-            max= max + 1;
-
-            //Them dat cho
-            var b = new Booking({
-                _maDatCho: max,
-                _thoiGianDatCho: new Date().toString(),
-                _tongTien: tongTien,
-                _trangThai: 1
-            });
-
-            b.save(function(err, b) {
-                if (err) {
-                    res.status(400).send({
-                        'error': 'Bad request (The data is invalid)'
-                    });
-                    return console.error(err);
-                } else {
-                    Booking.find(function(err, bookings) {
-                        res.status(201).send({
-                            'messege': 'Created'
+                b.save(function(err, b) {
+                    if (err) {
+                        res.status(400).send({
+                            'error': 'Bad request (The data is invalid)'
                         });
+                        return console.error(err);
+                    } else {
+                        Booking.find(function(err, bookings) {
+                            res.status(201).send({
+                                'messege': 'Created',
+                                'data': b
+                                });
+                            });
+                        }
                     });
-                }
+                });
             });
+        } else {
+             //Them dat cho
+                var b = new Booking({
+                    _maDatCho: max,
+                    _thoiGianDatCho: new Date().toString(),
+                    _tongTien: tongTien,
+                    _trangThai: 1
+                });
 
-            //Them hanh khach
-            var p = new Passenger({
-                _maDatCho: max,
-                _danhXung: danhXung,
-                _ho: ho,
-                _ten: ten,
-                _dienThoai : dienThoai,
-                _quocTich : quocTich
-            });
-
-            p.save(function(err, p) {
-                if (err) {
-                    res.status(400).send({
-                        'error': 'Bad request (The data is invalid)'
+                b.save(function(err, b) {
+                    if (err) {
+                        res.status(400).send({
+                            'error': 'Bad request (The data is invalid)'
+                        });
+                        return console.error(err);
+                    } else {
+                        Booking.find(function(err, bookings) {
+                            res.status(201).send({
+                                'messege': 'Created',
+                                'data': b
+                                });
+                            });
+                        }
                     });
-                    return console.error(err);
-                } else {
-                    //Passenger.find(function(err, passengers) {
-                        // res.status(201).send({
-                        //     'messege': 'Created'
-                        // });
-                    //});
-                }
-            });
+        }
+
+
+
+
+        //Them hanh khach
+        var p = new Passenger({
+            _maDatCho: max,
+            _danhXung: danhXung,
+            _ho: ho,
+            _ten: ten,
+            _dienThoai: dienThoai,
+            _quocTich: quocTich
+        });
+
+        p.save(function(err, p) {
+            if (err) {
+                res.status(400).send({
+                    'error': 'Bad request (The data is invalid)'
+                });
+                return console.error(err);
+            } else {
+                //Passenger.find(function(err, passengers) {
+                // res.status(201).send({
+                //     'messege': 'Created'
+                // });
+                //});
+            }
+        });
     });
 });
 
@@ -514,31 +563,31 @@ app.post('/api/flights', function(req, res) {
     var hang = req.body.hang;
     var soGhe = req.body.soGhe;
     var giaVe = req.body.giaVe;
-    
+
     var f = new Flight({
-         _ma:maChuyenBay,
-         _noiDi:noiDi,
-         _noiDen:noiDen,
-         _ngayDi:ngay,
-         _gioDi: gio,
-         _hang: hang,
-         _soGhe: '200',
-         _giaVe: giaVe
+        _ma: maChuyenBay,
+        _noiDi: noiDi,
+        _noiDen: noiDen,
+        _ngayDi: ngay,
+        _gioDi: gio,
+        _hang: hang,
+        _soGhe: '200',
+        _giaVe: giaVe
     });
 
     f.save(function(err, f) {
-                if (err) {
-                    res.status(400).send({
-                        'error': 'Bad request (The data is invalid)'
-                    });
-                    return console.error(err);
-                } else {
-                    Booking.find(function(err, bookings) {
-                        res.status(201).send({
-                            'messege': 'Created'
-                        });
-                    });
-                }
+        if (err) {
+            res.status(400).send({
+                'error': 'Bad request (The data is invalid)'
+            });
+            return console.error(err);
+        } else {
+            Booking.find(function(err, bookings) {
+                res.status(201).send({
+                    'messege': 'Created'
+                });
+            });
+        }
     });
 });
 

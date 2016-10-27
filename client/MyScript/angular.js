@@ -16,6 +16,10 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './nhap-thong-tin-khach.html',
         controller: 'thongTinKhachHangCtrl'
       }).
+      when('/thong-tin-chuyen-bay1', {
+        templateUrl: './thong-tin-chuyen-bay.html',
+        controller: 'thongTinChuyenBay1Ctrl'
+      }).
       otherwise({
         redirectTo: '/'
       });
@@ -23,19 +27,18 @@ myapp.config(['$routeProvider', function($routeProvider) {
 
 
 myapp.service('Data',function() {
-  this.noiDi = '';
-  this.noiDen = '';
-  this.ngayDi = '';
-  this.soNguoi;
-  this.maChuyenBay = '';
-  this.hang = '';
+  this.flights = [];
+  this.backFlights = [];
+  this.soGheDi;
+  this.khuHoi = false;
+  this.selectedFlight = {};
+  this.selectedBackFlight = {};
 });
 
-myapp.controller('myCtrl',  ['$scope', '$http', 'Data', '$location', function ($scope, $http, Data, $location) {
+myapp.controller('myCtrl',  ['$scope', '$http', 'Data', '$location', '$rootScope', function ($scope, $http, Data, $location, $rootScope) {
  	$scope.number_value1 = ["1", "2", "3", "4", "5", "6"];
 	$scope.number_value2 = ["0", "1", "2"];
 	$scope.number_value3 = ["0", "1"];
-	$scope.danh_xung = ["Ông", "Bà"];
 
     $scope.noiDi = '';
     $scope.noiDen = '';
@@ -195,6 +198,33 @@ myapp.controller('myCtrl',  ['$scope', '$http', 'Data', '$location', function ($
     };
 
 
+    $scope.timChuyenBay1 = function(noiDi, noiDen, ngayDi, soNguoi, khuHoi) {
+    	$http({
+                method: 'GET',
+                url: '/api/flights',
+                params : {
+                	'maNoiDi' : noiDi,
+                	'maNoiDen' : noiDen,
+                	'ngayDi' : ngayDi,
+                	'soNguoi' : soNguoi
+                }
+            }).then(function successCallback(response) {
+                console.log('timChuyenBay1 success');
+                console.log(response.data);
+                if (!khuHoi)
+                {
+                	Data.flights = response.data;
+                } else {
+                	Data.backFlights = response.data;
+                }
+                
+                $rootScope.$broadcast("tableDataUpdated", {});
+                
+            }, function errorCallback(response) {
+                console.log('timChuyeBay1 failed');
+            });
+    };
+
     $scope.timChuyenBay = function ()
 	{
 		$scope.selectedNgaydi = $('#from').val();
@@ -221,48 +251,43 @@ myapp.controller('myCtrl',  ['$scope', '$http', 'Data', '$location', function ($
 			return;
 		}	
 
-        Data.noiDi = $scope.selectedNoidi;
-        Data.noiDen = $scope.selectedNoiden;
-        Data.ngayDi = $scope.selectedNgaydi.replace(/\//g,"-");
-        Data.ngayVe = $scope.selectedNgayve;
-        Data.soNguoi = parseInt($scope.selectedNumber1, 10)
+        var noiDi = $scope.selectedNoidi;
+        var noiDen = $scope.selectedNoiden;
+        var ngayDi = $scope.selectedNgaydi.replace(/\//g,"-");
+        var ngayVe = $scope.selectedNgayve;
+        var soNguoi = parseInt($scope.selectedNumber1, 10)
                 		parseInt($scope.selectedNumber2, 10)
         				  parseInt($scope.selectedNumber3, 10);
-  
+
+
+        Data.soGheDi = soNguoi;		
+        Data.khuHoi = $scope.show;	  
+       $scope.timChuyenBay1(noiDi, noiDen, ngayDi, soNguoi, false);
+       if ($scope.show == true) {
+       	 $scope.timChuyenBay1(noiDen, noiDi, ngayVe, soNguoi, true);
+       }
        $location.path('/chon-chuyen-bay');
    };
+
+  	$scope.muaVeTrucTuyen = function () {
+  		$location.path('/');
+  	}
+
+  	$scope.thongtinChuyenBay = function () {
+  		$location.path('/thong-tin-chuyen-bay1');
+  	}
    
 }]);
 
-myapp.controller('chonChuyenBayCtrl',  ['$scope', '$http', 'Data', '$location', function ($scope, $http, Data, $location) {
-
-	console.log(Data.noiDi);
-	console.log(Data.noiDen);
-	console.log(Data.ngayDi);
-	console.log(Data.soNguoi);
-
-	$scope.timChuyenBay1 = function(noiDi, noiDen, ngayDi, soNguoi) {
-    	$http({
-                method: 'GET',
-                url: '/api/flights',
-                params : {
-                	'maNoiDi' : noiDi,
-                	'maNoiDen' : noiDen,
-                	'ngayDi' : ngayDi,
-                	'soNguoi' : soNguoi
-                }
-            }).then(function successCallback(response) {
-                console.log('timChuyenBay1 success');
-                console.log(response.data);
-                $scope.flights = response.data;
-                
-            }, function errorCallback(response) {
-                console.log('timChuyeBay1 failed');
-            });
-    };
-
-
-       $scope.selectedFlight;
+myapp.controller('chonChuyenBayCtrl',  ['$scope', '$http', 'Data', '$location', '$rootScope', function ($scope, $http, Data, $location,  $rootScope) {
+		
+		$rootScope.$on("tableDataUpdated", function (args) {
+			$scope.flights = Data.flights;
+			$scope.backFlights = Data.backFlights;
+		});
+		$scope.khuHoi = Data.khuHoi;
+       $scope.selectedFlight = null;;
+       $scope.selectedBackFlight = null;;
        $scope.flight = {};
        $scope.flight.selected = {};
         //Chọn chuyến bay
@@ -270,28 +295,104 @@ myapp.controller('chonChuyenBayCtrl',  ['$scope', '$http', 'Data', '$location', 
         angular.forEach($scope.flights, function(selected) {
             if (selected.selected) {
                 $scope.selectedFlight = selected;
-                      Data.maChuyenBay = $scope.selectedFlight._ma;
-        Data.hang = $scope.selectedFlight._hang;;
-
-        $location.path('/nhap-thong-tin-khach');
-
+                Data.selectedFlight = $scope.selectedFlight;
+        
             }
         });
-        console.log($scope.selectedFlight);
-  
+        angular.forEach($scope.backFlights, function(selected) {
+            if (selected.selected) {
+                $scope.selectedBackFlight = selected;
+                Data.selectedBackFlight = $scope.selectedBackFlight;
+        
+            }
+        });
+        if (!Data.khuHoi) {
+        	if ($scope.selectedFlight != null) {
+        		$location.path('/nhap-thong-tin-khach');
+        	} else {
+        		alert('Vui lòng chọn chuyến bay');
+        	}
+        } else {
+        	if ($scope.selectedFlight != null
+        		&& $scope.selectedBackFlight != null) {
+        		$location.path('/nhap-thong-tin-khach');
+        	} else {
+        		alert('Vui lòng chọn chuyến bay');
+        	}
+        }
+        
     };
-
-    $scope.flights = [];
-    $scope.timChuyenBay1(Data.noiDi, Data.noiDen, Data.ngayDi, Data.soNguoi);
-
-    //Bien check radio-button
-    $scope.checked = false;
 
 }]);
 
 
 myapp.controller('thongTinKhachHangCtrl',  ['$scope', '$http', 'Data', '$location', function ($scope, $http, Data, $location) {
-	
-	console.log(Data.hang);
 
+	console.log(Data.selectedFlight);
+	console.log(Data.selectedBackFlight);
+	$scope.danh_xung = ["Ông", "Bà"];
+	$scope.selectedDX = '';
+	$scope.khachHang = null;
+	$scope.selectedFlight = Data.selectedFlight;
+	$scope.selectedBackFlight = Data.selectedBackFlight;
+	
+
+	$scope.datCho = function(khuHoi,
+							maChuyenBayDi, hangDi, soGheDat, ngayDi,
+							maChuyenBayVe, hangVe, ngayVe,
+    						danhXung, ho, ten, dienThoai, quocTich) {
+    	$http({
+                method: 'POST',
+                url: '/api/bookings',
+                data : {
+                	'khuHoi' : khuHoi,
+                	'maChuyenBayDi' : maChuyenBayDi,
+                	'hangDi' : hangDi,
+                	'soGheDat' : soGheDat,
+                	'ngayDi' : ngayDi,
+                	'maChuyenBayVe' : maChuyenBayVe,
+                	'hangVe' : hangVe,
+                	'ngayVe' : ngayVe,
+                	'danhXung' : danhXung,
+                	'ho' : ho,
+                	'ten' : ten,
+                	'dienThoai' : dienThoai,
+                	'quocTich' : quocTich
+                }
+            }).then(function successCallback(response) {
+                alert('Đặt chỗ thành công'
+                	+'\nMã đặt chỗ: ' + response.data.data._maDatCho
+                	+'\nNgày đi: ' + $scope.selectedFlight._ngayDi
+                	+'\nGiờ đi: ' + $scope.selectedFlight._gioDi
+                	+'\nKhách hàng đại diện: ' +' ' + $scope.khachHang.danhXung +' ' + $scope.khachHang.ho +' ' + $scope.khachHang.ten
+                	+'\nTổng tiền:' + response.data.data._tongTien);
+                
+            }, function errorCallback(response) {
+                alert('Đặt chỗ thất bại, vui lòng thử lại !');
+            });
+    }
+
+    $scope.hoanTatDatCho = function() {
+    	$scope.datCho(Data.khuHoi,
+    		$scope.selectedFlight._ma, $scope.selectedFlight._hang, Data.soGheDi, $scope.selectedFlight._ngayDi,
+    		$scope.selectedBackFlight._ma, $scope.selectedBackFlight._hang, $scope.selectedBackFlight._ngayDi,
+    		$scope.khachHang.danhXung, $scope.khachHang.ho, $scope.khachHang.ten, $scope.khachHang.dienThoai, $scope.khachHang.quocTich);
+		
+
+		$location.path('/');
+
+
+	};
+}]);
+
+myapp.controller('thongTinChuyenBay1Ctrl',  ['$scope', '$http', 'Data', '$location', function ($scope, $http, Data, $location) {
+	
+}]);
+
+myapp.controller('thongTinChuyenBay2Ctrl',  ['$scope', '$http', 'Data', '$location', function ($scope, $http, Data, $location) {
+	
+}]);
+
+myapp.controller('thongTinChuyenBay3Ctrl',  ['$scope', '$http', 'Data', '$location', function ($scope, $http, Data, $location) {
+	
 }]);

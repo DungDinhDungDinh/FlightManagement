@@ -23,25 +23,25 @@
         <div class="center-tab">     
             <div class="tab-1">
             	<p class="text"> Danh xưng: </p>
-                <select class="input-normal input-gioi-tinh" ng-model="selectedDX" ng-options="item for item in danh_xung" ng-change="checkNumber1(selectedDX)">
+                <select class="input-normal input-gioi-tinh" ng-model="khachHang.danhXung" ng-options="item for item in danh_xung" ng-change="checkNumber1(khachHang.danhXung)">
             	</select>  
                 
             	<p class="text clear"> Họ: </p>
-                <input class="input-normal" placeholder="Last Name"/>
+                <input ng-model="khachHang.ho" class="input-normal" placeholder="Last Name"/>
                 
                 <p class="text"> Tên: </p>
-                <input class="input-normal" placeholder="First Name"/>
+                <input ng-model="khachHang.ten" class="input-normal" placeholder="First Name"/>
                 
                 <p class="text clear"> Số điện thoại: </p>
-                <input class="input-normal" placeholder="Phone number" />              
+                <input ng-model="khachHang.dienThoai" class="input-normal" placeholder="Phone number" />              
                 
                 <p class="text"> Quốc gia: </p>
-                <input class="input-normal" placeholder="Nation"/> 
+                <input ng-model="khachHang.quocTich" class="input-normal" placeholder="Nation"/> 
                   
             </div>
 
             <div class="tab-1">
-            	<button type="button" class="btn-tim-kiem">Hoàn tất</button>
+            	<button type="button" class="btn-tim-kiem" ng-click="hoanTatDatCho()">Hoàn tất</button>
             </div>
         </div>
     </div>

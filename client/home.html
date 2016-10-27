@@ -2,10 +2,11 @@
 
   <script>
   $( function() {
+    //var dateToday = new Date();
+    //minDate: dateToDate
     var dateFormat = 'dd-mm-yy',
       from = $( "#from" )
         .datepicker({
-          defaultDate: "+1w",
           changeMonth: true,
           numberOfMonths: 2,
           dateFormat: dateFormat
@@ -14,7 +15,6 @@
           to.datepicker( "option", "minDate", getDate( this ) );
         }),
       to = $( "#to" ).datepicker({
-        defaultDate: "+1w",
         changeMonth: true,
         numberOfMonths: 2,
         dateFormat: dateFormat
@@ -43,13 +43,14 @@
 
       <div class="sub-main" style="background-color:#F3F3F3; font-family:Arial, Verdana, sans-serif;" >
             <div class="head-tab">
-                    <a class="mua-ve">
-                        <div class="tab-chosen">Mua vé trực tuyến</div>
+                    <a  class="tab-chosen"> 
+                    <div class="mua-ve" ng-click='muaVeTrucTuyen()' >Mua vé trực tuyến</div>
                     </a>
-                    
-                    <a class="mua-ve" href="thong-tin-chuyen-bay-1.html">
-                        <div class="tab">Thông tin chuyến bay</div>
+                       
+                    <a class="tab" > 
+                    <div class="mua-ve" ng-click='thongTinChuyenBay()'>Thông tin chuyến bay</div>
                     </a>
+                       
             </div>
                   
             <div class="tim-chuyen-bay-tab">
