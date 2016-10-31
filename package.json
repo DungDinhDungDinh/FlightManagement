@@ -11,7 +11,8 @@
   "dependencies": {
     "body-parser": "*",
     "express": "^4.14.0",
-    "mongoose": "*"
+    "mongoose": "*",
+    "jsonwebtoken" : "*"
   },
   "author": "Chung Nguyen - Danh Dang - Dung Dinh",
   "license": "MIT"
