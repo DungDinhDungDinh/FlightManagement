@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Flight Management</title>
+<link rel="shortcut icon" href="image/FlightTrack-icon.png" type="image/png"/>
+<link href="MyScript/MyCss.css" rel="stylesheet" type="text/css" />
+<script src="MyScript/angular.min.js"></script>
+<script src="MyScript/angular.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css"/>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body>
+
+<div>
+	<div class="main" ng-controller="chonChuyenBayCtrl">
+    <div style="background-color:#FFF">
+        <div class="head-tab">
+        	<a class="mua-ve" href="them-chuyen-bay.html">
+            	<div class="tab">Thêm chuyến bay</div>
+            </a> 
+            <a class="mua-ve" href="admin-chinh-sua-cb.html">
+            	<div class="tab">Chỉnh sửa chuyến bay</div>
+            </a> 
+            <a class="mua-ve" href="admin-xem-dat-ve.html">
+            	<div class="tab-chosen">Tình trạng đặt vé</div>
+            </a>
+        </div>
+        <hr>
+    </div>
+         
+
+      
+        <div class="center-tab" style="font-family:Arial, Verdana, sans-serif;">
+
+        	<h3 class="pleft3"> Tình trạng đặt vé </h3>
+            
+            <table >
+            	<col width="120">
+  				<col width="150">
+                <col width="150">
+                <col width="150">
+                <col width="120">
+  				<col width="120">
+                <tr>              
+                    <th>Mã CB</th>
+                    <th>Ngày đi</th>
+                    <th>Hạng</th>
+                    <th>Giá vé</th>
+                    <th>Số ghế</th>
+                    <th>Số ghế đã đặt</th>
+                </tr>
+                <tr class="rowtb" ng-repeat="flight in flights"  ng-class="{selected: flight._hang === idSelectedHang}">                      
+                    <td>
+                    	<label for="MyField">AB236</label>       
+                    </td>
+                    <td>
+                        <label for="MyField">10-10-2016</label>       
+                    </td>
+                    <td>
+                    	<label for="MyField">E1</label>
+                    </td>
+                    <td>
+                    	<label for="MyField">2000000</label>
+                    </td>
+                    <td>
+                    	<label for="MyField">100</label>
+                    </td>
+                    <td>
+                    	<label for="MyField">25</label>
+                    </td>
+                </tr>
+            </table>
+            
+            </div>         
+
+            <div class="tab-1">
+            	<button type="button" class="btn-tim-kiem" ng-click="chonChuyenBay()">Tiếp tục</button>
+        	</div>                            
+        </div>	          
+    </div>
+</div>
+
+</body>

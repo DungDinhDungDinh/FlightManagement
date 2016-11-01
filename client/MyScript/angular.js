@@ -297,15 +297,16 @@ myapp.controller('chonChuyenBayCtrl',  ['$scope', '$http', 'Data', '$location', 
         $location.path('/thong-tin-chuyen-bay-1');
     }
 		
-		$rootScope.$on("tableDataUpdated", function (args) {
-			$scope.flights = Data.flights;
-			$scope.backFlights = Data.backFlights;
-		});
+	$rootScope.$on("tableDataUpdated", function (args) {
+		$scope.flights = Data.flights;
+		$scope.backFlights = Data.backFlights;
+	});
 		$scope.khuHoi = Data.khuHoi;
-       $scope.selectedFlight = null;;
-       $scope.selectedBackFlight = null;;
-       $scope.flight = {};
-       $scope.flight.selected = {};
+       	$scope.selectedFlight = null;;
+       	$scope.selectedBackFlight = null;;
+       	$scope.flight = {};
+       	$scope.flight.selected = {};
+	   
         //Chọn chuyến bay
     $scope.chonChuyenBay = function() {
         angular.forEach($scope.flights, function(selected) {
@@ -322,7 +323,7 @@ myapp.controller('chonChuyenBayCtrl',  ['$scope', '$http', 'Data', '$location', 
         
             }
         });
-        if (!Data.khuHoi) {
+		     if (!Data.khuHoi) {
         	if ($scope.selectedFlight != null) {
         		$location.path('/nhap-thong-tin-khach');
         	} else {
@@ -338,6 +339,14 @@ myapp.controller('chonChuyenBayCtrl',  ['$scope', '$http', 'Data', '$location', 
         }
         
     };
+	
+	$scope.setSelected = function(flight){
+		console.log(flight._hang);
+		console.log(flight.selected);
+		$scope.idSelectedHang = flight._hang;
+	}
+		
+   
 
 }]);
 

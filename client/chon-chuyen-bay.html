@@ -21,7 +21,7 @@
       
         <div class="center-tab" style="font-family:Arial, Verdana, sans-serif;">
 
-        <h3 class="pleft3"> Chuyến bay đi </h3>
+        	<h3 class="pleft3"> Chuyến bay đi </h3>
             
             <table >
             	<col width="150">
@@ -37,7 +37,7 @@
                     <th>Giá vé</th>
                     <th>Chọn</th>
                 </tr>
-                <tr class="rowtb" ng-repeat="flight in flights" ng-click="setSelected(flight)" ng-class="{selected: flight._hang === idSelectedHang}">                      
+                <tr class="rowtb" ng-repeat="flight in flights"  ng-class="{selected: flight._hang === idSelectedHang}">                      
                     <td>
                     	<label for="MyField">{{flight._ma}}</label>       
                     </td>
@@ -54,15 +54,20 @@
                     	<label for="MyField">{{flight._giaVe}}</label>
                     </td>
                     <td>
-                        <input type="radio" name="chuyenBay" ng-model="flight.selected" ng-value="flight";
+                        <input type="radio" name="chuyenBay" ng-model="flight.selected" ng-value="flight" ng-click="setSelected(flight)";
                       style="width: 50px" ng-checked="checked"/>
                     </td>
                 </tr>
             </table>
+            
+            
+            
+            
+            </div>
 
             <hr style="margin-top:30px;"/>
             <div ng-show="khuHoi">
-            <h3 class="pleft3"> Chuyến bay về </h3>
+            	<h3 class="pleft3"> Chuyến bay về </h3>
                 <table >
                     <col width="150">
                     <col width="150">
@@ -77,7 +82,7 @@
                         <th>Giá vé</th>
                         <th>Chọn</th>
                     </tr>
-                    <tr class="rowtb" ng-repeat="flight in backFlights" ng-click="setSelected(flight)" ng-class="{selected: flight._hang === idSelectedHang}">                      
+                    <tr class="rowtb" ng-repeat="flight in backFlights"  ng-class="{selected: flight._hang === idSelectedHang}">                      
                         <td>
                             <label for="MyField">{{flight._ma}}</label>       
                         </td>
@@ -94,11 +99,11 @@
                             <label for="MyField">{{flight._giaVe}}</label>
                         </td>
                         <td>
-                            <input type="radio" name="chuyenBay" ng-model="flight.selected" ng-value="flight";
+                            <input type="radio" name="chuyenBay" ng-model="flight.selected" ng-value="flight" ng-click="setSelected(flight)";
                           style="width: 50px" ng-checked="checked"/>
                         </td>
                     </tr>
-                </table>
+                </table>                       
             </div>
             
 
