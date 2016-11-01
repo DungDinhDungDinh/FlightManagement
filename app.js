@@ -6,7 +6,7 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(express.static('client'));
 
 
-
+var ObjectId = require('mongodb').ObjectID;
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://dungdinh:tthuyddung218@ds053136.mlab.com:53136/flight_management');
 
@@ -95,8 +95,8 @@ apiRoutes.get('/flights', function(req, res) {
             "$where": "this._soGhe >= " + soNguoi
         }).select('-_id').exec(function(err, flights) {
             if (err) {
-                res.status(400).send({
-                    'error': 'Bad request (The data is invalid)'
+                res.status(404).send({
+                    'error': 'Flight not found'
                 });
                 return console.error(err);
             } else {
@@ -112,8 +112,8 @@ apiRoutes.get('/flights', function(req, res) {
             "$where": "this._soGhe >= 0"
         }).select('-_id').exec(function(err, flights) {
             if (err) {
-                res.status(400).send({
-                    'error': 'Bad request (The data is invalid)'
+                res.status(404).send({
+                    'error': 'Flight not found'
                 });
                 return console.error(err);
             } else {
@@ -127,8 +127,8 @@ apiRoutes.get('/flights', function(req, res) {
             _noiDen: maNoiDen,
         }).select('-_id').exec(function(err, flights) {
             if (err) {
-                res.status(400).send({
-                    'error': 'Bad request (The data is invalid)'
+                res.status(404).send({
+                    'error': 'Flight not found'
                 });
                 return console.error(err);
             } else {
@@ -141,8 +141,20 @@ apiRoutes.get('/flights', function(req, res) {
             _ma: maChuyenBay
         }).select('-_id').exec(function(err, flights) {
             if (err) {
-                res.status(400).send({
-                    'error': 'Bad request (The data is invalid)'
+                res.status(404).send({
+                    'error': 'Flight not found'
+                });
+                return console.error(err);
+            } else {
+                res.status(200).send(flights);
+                console.log(flights);
+            }
+        });
+    } else {
+        Flight.find({}).exec(function(err, flights) {
+            if (err) {
+               res.status(404).send({
+                    'error': 'Flight not found'
                 });
                 return console.error(err);
             } else {
@@ -152,6 +164,20 @@ apiRoutes.get('/flights', function(req, res) {
         });
     }
 });
+
+
+
+// apiRoutes.get('/flights/:id', function(req, res) {
+//     Flight.find({
+//         _id : ObjectId(req.params.id)
+//     }, function (err, f) {
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             console.log(f);
+//         }
+//     });
+// });
 
 
 // Đặt chỗ
@@ -242,6 +268,20 @@ apiRoutes.post('/bookings', function(req, res) {
                             });
                         }
                     });
+
+                    var chuyenBayVe = new FlightDetail({
+                        _maDatCho: max,
+                        _maChuyenBay: maChuyenBayVe,
+                        _ngay: ngayVe,
+                        _hang: hangVe
+                    });
+
+                    chuyenBayVe.save(function(err, chuyenBayVe) {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
+
                 });
             });
         } else {
@@ -255,10 +295,7 @@ apiRoutes.post('/bookings', function(req, res) {
 
                 b.save(function(err, b) {
                     if (err) {
-                        res.status(400).send({
-                            'error': 'Bad request (The data is invalid)'
-                        });
-                        return console.error(err);
+                         console.error(err);
                     } else {
                         Booking.find(function(err, bookings) {
                             res.status(201).send({
@@ -271,7 +308,18 @@ apiRoutes.post('/bookings', function(req, res) {
         }
 
 
+        var chuyenBayDi = new FlightDetail({
+            _maDatCho : max,
+            _maChuyenBay : maChuyenBayDi,
+            _ngay : ngayDi,
+            _hang : hangDi
+        });
 
+        chuyenBayDi.save(function(err, chuyenBayDi) {
+            if (err) {
+                console.log(err);
+            }
+        });
 
         //Them hanh khach
         var p = new Passenger({
@@ -285,10 +333,7 @@ apiRoutes.post('/bookings', function(req, res) {
 
         p.save(function(err, p) {
             if (err) {
-                res.status(400).send({
-                    'error': 'Bad request (The data is invalid)'
-                });
-                return console.error(err);
+                console.error(err);
             } else {
                 //Passenger.find(function(err, passengers) {
                 // res.status(201).send({
@@ -298,6 +343,31 @@ apiRoutes.post('/bookings', function(req, res) {
             }
         });
     });
+});
+
+
+
+//############################ Authenticate ############################################
+
+
+apiRoutes.post('/users', function(req, res) {
+
+  // create a sample user
+  var admin = new User({ 
+    username: req.body.username, 
+    password: req.body.password,
+    admin: true 
+  });
+
+  // save the sample user
+  admin.save(function(err) {
+    if (err) {
+        res.status(400).json({'error' : 'bad request'});
+    }
+
+    console.log('User saved successfully');
+    res.status(201).send({'message' : 'created'});
+  });
 });
 
 
@@ -416,8 +486,91 @@ apiRoutes.post('/flights', function(req, res) {
 });
 
 
+// Sửa chuyến bay
+
+apiRoutes.put('/flights/:id', function(req, res) {
+   
+    var maChuyenBay = req.body.maChuyenBay;
+    var noiDi = req.body.noiDi;
+    var noiDen = req.body.noiDen;
+    var ngay = req.body.ngay;
+    var gio = req.body.gio;
+    var hang = req.body.hang;
+    var soGhe = req.body.soGhe;
+    var giaVe = req.body.giaVe;
+
+    Flights.findOne({
+               _id : ObjectId(req.params.id)
+            }, function(err, f) {
+
+                if (err) throw err;
+
+                if (!f) {
+                    f._ma = maChuyenBay;
+                    f._noiDi = noiDi;
+                    f._noiDen = noiDen;
+                    f._ngayDi = ngay;
+                    f._gioDi = gio;
+                    f._hang = hang;
+                    f._soGhe = soGhe;
+                    f._giaVe = giaVe;
+
+                    f.save(function(err, f) {
+                    if (err) {
+                        res.status(400).send({
+                            'error': 'Bad request (The data is invalid)'
+                        });
+                        return console.error(err);
+                    } else {
+                        Booking.find(function(err, bookings) {
+                            res.status(200).send({
+                                'messege': 'Updated'
+                            });
+                        });
+                    }
+                });
+                }
 
 
+                
+            });
+});
+
+apiRoutes.delete('/flights/:id', function(req, res) {
+
+    Flights.remove({
+        _id : ObjectId(req.params.id)
+    }, function(err) {
+        if (!err) {
+            console.log('remove flight successfull');
+        } else {
+            console.log(error);
+        }
+    });
+});
+
+
+//API Lấy danh sách đặt chỗ
+apiRoutes.get('/bookings', function(req, res) {
+    Booking.find(function(err, bookings) {
+        if (err)
+            return console.error(err);
+        else {
+            res.send(bookings);
+        }
+    });
+});
+
+//API Lấy danh sách chi tiết chuyến bay
+apiRoutes.get('/flight_details', function(req, res) {
+    FlightDetail.find(function(err, flight_details) {
+        if (err)
+            return console.error(err);
+        else {
+            res.send(flight_details);
+        }
+    });
+});
 
 
 
@@ -428,7 +581,6 @@ apiRoutes.get('/', function(req, res) {
 });
 
 app.use('/api', apiRoutes);
-
 
 
 //Test 

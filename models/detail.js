@@ -11,7 +11,7 @@ var flightDetailSchema = mongoose.Schema({
 		required: true,
 	},
 	_ngay:{
-		type:Number,
+		type:String,
 		required: true
 	},
 	_hang:{

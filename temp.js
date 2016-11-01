@@ -227,29 +227,9 @@ app.get('/flight-details/:_maDatCho/:_maChuyenBay/:_ngay/:_hang', function(req, 
     });
 });
 
-//API Lấy danh sách chi tiết chuyến bay
-app.get('/api/flight_details', function(req, res) {
-    FlightDetail.find(function(err, flight_details) {
-        if (err)
-            return console.error(err);
-        else {
-            res.send(flight_details);
-            //console.log(flight_details);
-        }
-    });
-});
 
-//API Lấy danh sách đặt chỗ
-app.get('/api/bookings', function(req, res) {
-    Booking.find(function(err, bookings) {
-        if (err)
-            return console.error(err);
-        else {
-            res.send(bookings);
-            //console.log(bookings);
-        }
-    });
-});
+
+
 
 //API Lấy danh sách đặt chỗ
 app.get('/api/passengers', function(req, res) {
@@ -261,22 +241,4 @@ app.get('/api/passengers', function(req, res) {
             //console.log(passengers);
         }
     });
-});
-
-app.get('/setupUser', function(req, res) {
-
-  // create a sample user
-  var admin = new User({ 
-    username: 'admin', 
-    password: 'admin',
-    admin: true 
-  });
-
-  // save the sample user
-  admin.save(function(err) {
-    if (err) throw err;
-
-    console.log('User saved successfully');
-    res.json({ success: true });
-  });
 });
