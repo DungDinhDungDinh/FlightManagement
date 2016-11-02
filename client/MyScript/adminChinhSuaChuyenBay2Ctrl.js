@@ -16,6 +16,7 @@ myapp.controller('adminChinhSuaChuyenBay2Ctrl',  ['$scope', '$http', 'Data', '$l
 	        }
 	    }).then(function successCallback(response) {
 	    	console.log('suasanbay success');
+            alert('Lưu thay đổi thành công');
 	    }, function errorCallback(response) {
 	        console.log('suaSanBay failed');
 
