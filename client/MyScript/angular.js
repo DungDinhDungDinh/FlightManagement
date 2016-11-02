@@ -30,7 +30,7 @@ myapp.config(['$routeProvider', function($routeProvider) {
         templateUrl: './view/admin-them-chuyen-bay.html',
         controller: 'adminThemChuyenBayCtrl'
     }).
-    when('/admin-dang-nhap', {
+    when('/admin', {
         templateUrl: './view/admin-dang-nhap.html',
         controller: 'adminDangNhapCtrl'
     }).

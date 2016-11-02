@@ -13,7 +13,7 @@ myapp.controller('adminChinhSuaChuyenBay1Ctrl',  ['$scope', '$http', 'Data', '$l
 
     $scope.flights=[];
 
-    console.log('Data.token',Data.token);
+    //console.log('Data.token',Data.token);
 
 
 
@@ -30,9 +30,6 @@ myapp.controller('adminChinhSuaChuyenBay1Ctrl',  ['$scope', '$http', 'Data', '$l
     }, function errorCallback(response) {
         console.log('getting failed');
     });
-    
-
-
 
 
     $scope.flight = {};
@@ -47,14 +44,15 @@ myapp.controller('adminChinhSuaChuyenBay1Ctrl',  ['$scope', '$http', 'Data', '$l
     };
 
     $scope.Delete = function(flight){
+        Data.flight = flight;
     	$http({
 	        method: 'DELETE',
 	        url: '/api/flights/' + Data.flight._id,
-	        data:{
+	        params:{
 			    'token': Data.token
 	        }
 	    }).then(function successCallback(response) {
-	    	$scope.flights = response.data;
+            $scope.flights = response.data;
 	    }, function errorCallback(response) {
 	        console.log('XOASanBay failed');
 

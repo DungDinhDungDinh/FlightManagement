@@ -447,11 +447,10 @@ apiRoutes.post('/flights', function(req, res) {
             });
             return console.error(err);
         } else {
-            Booking.find(function(err, bookings) {
+
                 res.status(201).send({
                     'messege': 'Created'
                 });
-            });
         }
     });
 });
@@ -508,13 +507,16 @@ apiRoutes.put('/flights/:id', function(req, res) {
     var soGhe = req.body.soGhe;
     var giaVe = req.body.giaVe;
 
+    console.log('put');
+
     Flight.findOne({
                _id : ObjectId(req.params.id)
             }, function(err, f) {
 
-                if (err) throw err;
+                if (err) 
+                    console.log(err);
 
-                if (!f) {
+                if (f) {
                     f._ma = maChuyenBay;
                     f._noiDi = noiDi;
                     f._noiDen = noiDen;
@@ -524,18 +526,18 @@ apiRoutes.put('/flights/:id', function(req, res) {
                     f._soGhe = soGhe;
                     f._giaVe = giaVe;
 
-                    f.save(function(err, f) {
+                    f.save(function(err, f1) {
                     if (err) {
+                        console.error(err);
                         res.status(400).send({
                             'error': 'Bad request (The data is invalid)'
                         });
-                        return console.error(err);
+                        
                     } else {
-                        Booking.find(function(err, bookings) {
+                        console.log('updated');
                             res.status(200).send({
                                 'messege': 'Updated'
                             });
-                        });
                     }
                 });
                 }
@@ -552,6 +554,13 @@ apiRoutes.delete('/flights/:id', function(req, res) {
     }, function(err) {
         if (!err) {
             console.log('remove flight successfull');
+                Flight.find(function(err, flights) {
+                    if (err)
+                        return console.error(err);
+                    else {
+                        res.send(flights);
+                    }
+                });
         } else {
             console.log(error);
         }
@@ -589,7 +598,7 @@ apiRoutes.get('/flightss', function(req, res){
             return console.log(err);
         else {
             res.status(200).send(infos);
-            console.log('infos',infos);
+            //console.log('infos',infos);
         }
     });
 });
@@ -604,7 +613,7 @@ apiRoutes.post('/flight3s', function(req,res){
             return console.log(err);
         else {
             res.status(200).send(infos);
-            console.log('infos',infos);
+            //console.log('infos',infos);
         }
     });
 });

@@ -15,7 +15,7 @@ myapp.controller('adminChinhSuaChuyenBay2Ctrl',  ['$scope', '$http', 'Data', '$l
 			    'token': Data.token
 	        }
 	    }).then(function successCallback(response) {
-	    	$scope.flights = response.data;
+	    	console.log('suasanbay success');
 	    }, function errorCallback(response) {
 	        console.log('suaSanBay failed');
 
@@ -61,18 +61,18 @@ myapp.controller('adminChinhSuaChuyenBay2Ctrl',  ['$scope', '$http', 'Data', '$l
     $scope.soLuongGhe = Data.flight._soGhe;
     $scope.giaVe = Data.flight._giaVe;
 
-    $http({
-        method: 'POST',
-        url: '/api/flight3s',
-        data:{
-        	'noiDi': Data.flight.noiDi,
-        	'noiDen': Data.flight.noiDen,
-            'token': Data.token
-        }
-    }).then(function successCallback(response) {
-    	$scope.flights = response.data;
-    }, function errorCallback(response) {
-        console.log('laySanBay failed');
+    // $http({
+    //     method: 'POST',
+    //     url: '/api/flight3s',
+    //     data:{
+    //     	'noiDi': Data.flight.noiDi,
+    //     	'noiDen': Data.flight.noiDen,
+    //         'token': Data.token
+    //     }
+    // }).then(function successCallback(response) {
+    // 	$scope.flights = response.data;
+    // }, function errorCallback(response) {
+    //     console.log('laySanBay failed');
 
-    });
+    // });
 }]);
