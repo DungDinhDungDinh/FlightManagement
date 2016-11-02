@@ -36,14 +36,14 @@
 	<div class="main" >
     	<div style="background-color:#FFF">
         <div class="head-tab">
-        	<a class="mua-ve" href="them-chuyen-bay.html">
-            	<div class="tab">Thêm chuyến bay</div>
+        	<a class="mua-ve">
+            	<div class="tab" ng-click="themChuyenBay()">Thêm chuyến bay</div>
             </a> 
-            <a class="mua-ve" href="admin-chinh-sua-cb.html">
+            <a class="mua-ve">
             	<div class="tab-chosen">Chỉnh sửa chuyến bay</div>
             </a>
-            <a class="mua-ve" href="admin-xem-dat-ve.html">
-            	<div class="tab">Tình trạng đặt vé</div>
+            <a class="mua-ve" >
+            	<div class="tab" ng-click="xemTinhTrangDatVe()">Tình trạng đặt vé</div>
             </a>
         </div>
               
@@ -55,17 +55,17 @@
             <div class="tab-1 pleft">
               <p class="text" style="width:120px;"> Mã chuyến bay: </p>
                 <input class="input-normal" placeholder="Mã chuyến bay" ng-model="maChuyenBay"/>
-              <p class="text clear"> Khởi hành: </p>
+              <p class="text clear" ng-model="noiDi" > Khởi hành: </p>
                 <select class="input-from " ng-model="noiDi" ng-init="laySanBayDi()"  ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDi ">
               </select> 
-                <p class="text"> Kết thúc: </p>
+                <p class="text" ng-model="noiDen"> Kết thúc: </p>
                 <select class="input-from" ng-model="noiDen" ng-init="laySanBayDi()"ng-options="item[0]._ma as item[0]._diaDanh for item in sanBayDi "> 
                 </select>   
 
               <p class="text clear"> Ngày đi: </p>
                 <input type="text" class="daytime" id="from" name="from" placeholder="dd/mm/yyyy" ng-model="ngayDi"/>
         
-              <p class="text clear" style="width:50px;"> Giờ: </p>
+              <p class="text clear" style="width:50px;" ng-model="gio"> Giờ: </p>
                 <select class="daytime input-thoi-gian" ng-model="gio" style="width:80px;" ng-model="gio"> 
                       <option value="00">00</option>
                       <option value="01">01</option>
@@ -125,7 +125,7 @@
             
             <div class="tab-1 clear">
               <a>
-                <button type="button" class="btn-tim-kiem" ng-click="">Lưu thay đổi</button>
+                <button type="button" class="btn-tim-kiem" ng-click="chinhSuaChuyenBay()">Lưu thay đổi</button>
                 </a>
             </div>
         </div>

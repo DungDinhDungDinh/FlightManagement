@@ -347,6 +347,7 @@ apiRoutes.post('/bookings', function(req, res) {
 
 
 
+
 //############################ Authenticate ############################################
 
 
@@ -373,6 +374,7 @@ apiRoutes.post('/users', function(req, res) {
 
 // route to authenticate a user (POST http://localhost:8080/api/authenticate)
 apiRoutes.post('/authenticate', function(req, res) {
+    console.log('------Vo ham-----')
 
     console.log(req.body.username);
     console.log(req.body);
@@ -454,6 +456,9 @@ apiRoutes.post('/flights', function(req, res) {
     });
 });
 
+
+
+
 // route middleware to verify a token
 apiRoutes.use(function(req, res, next) {
 
@@ -503,7 +508,7 @@ apiRoutes.put('/flights/:id', function(req, res) {
     var soGhe = req.body.soGhe;
     var giaVe = req.body.giaVe;
 
-    Flights.findOne({
+    Flight.findOne({
                _id : ObjectId(req.params.id)
             }, function(err, f) {
 
@@ -542,7 +547,7 @@ apiRoutes.put('/flights/:id', function(req, res) {
 
 apiRoutes.delete('/flights/:id', function(req, res) {
 
-    Flights.remove({
+    Flight.remove({
         _id : ObjectId(req.params.id)
     }, function(err) {
         if (!err) {
@@ -576,6 +581,33 @@ apiRoutes.get('/flight_details', function(req, res) {
     });
 });
 
+apiRoutes.get('/flightss', function(req, res){
+    console.log('---Ham get cac chuyen bay----');
+    Flight.find({
+    }).exec(function(err, infos) {
+        if (err)
+            return console.log(err);
+        else {
+            res.status(200).send(infos);
+            console.log('infos',infos);
+        }
+    });
+});
+
+apiRoutes.post('/flight3s', function(req,res){
+    Flight.find({
+        _noiDi: req.body.noiDi,
+        _noiDen: req.body.noiDen,
+        _hang: req.body.hang
+    }).select('-_id').exec(function(err, infos) {
+        if (err)
+            return console.log(err);
+        else {
+            res.status(200).send(infos);
+            console.log('infos',infos);
+        }
+    });
+});
 
 
 var port = process.env.PORT || 8081;
