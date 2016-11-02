@@ -1,7 +1,7 @@
 ﻿
 
 <div>
-	<div class="main-2" ng-controller="chonChuyenBayCtrl">
+	<div class="main-2" ng-controller="adminDangNhapCtrl">
         <div style="background-color:#FFF">
             <div class="head-tab">
                 <a class="mua-ve">
@@ -16,13 +16,13 @@
         <div class="center-tab" style="font-family:Arial, Verdana, sans-serif;">
 			<div class="tab-1 pleft">
              	<p class="text" style="width:120px;"> Username: </p>
-                <input class="input-normal" placeholder="Username" ng-model="maChuyenBay"/>
+                <input class="input-normal" placeholder="Username" ng-model="userName"/>
                 <p class="text clear" style="width:120px;"> Password: </p>
-                <input type="password" class="input-normal" placeholder="Password" ng-model="maChuyenBay"/>
+                <input type="password" class="input-normal" placeholder="Password" ng-model="passWord"/>
             </div>
             
             <div class="tab-1">
-            	<button type="button" class="btn-tim-kiem" ng-click="chonChuyenBay()">Đăng nhập</button>
+            	<button type="button" class="btn-tim-kiem" ng-click="dangNhap()">Đăng nhập</button>
         	</div>   
         </div>                                                 
     </div>

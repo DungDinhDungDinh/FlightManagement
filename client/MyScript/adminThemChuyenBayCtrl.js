@@ -100,7 +100,8 @@ myapp.controller('adminThemChuyenBayCtrl',  ['$scope', '$http', 'Data', '$locati
                 	'gioDi': $scope.gio + ":" + $scope.phut,
                 	'hang': $scope.hang,
                 	'soLuongGhe': $scope.soLuongGhe,
-                	'giaVe': $scope.giaVe
+                	'giaVe': $scope.giaVe,
+                	'token': Data.token
                 }
             }).then(function successCallback(response) {
                 console.log('adding success');
@@ -114,6 +115,14 @@ myapp.controller('adminThemChuyenBayCtrl',  ['$scope', '$http', 'Data', '$locati
                 alert('Thêm chuyến bay thất bại!!');
             });
     };
+
+    $scope.chinhSuaChuyenBay = function(){
+    	$location.path('/admin-chinh-sua-chuyen-bay-1');
+    }
+
+    $scope.xemTinhTrangDatVe = function(){
+    	$location.path('/admin-xem-dat-ve');
+    }
 
     $scope.init();
 }]);

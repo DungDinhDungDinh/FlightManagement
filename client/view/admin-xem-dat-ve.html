@@ -3,13 +3,13 @@
 	<div class="main" ng-controller="chonChuyenBayCtrl">
     <div style="background-color:#FFF">
         <div class="head-tab">
-        	<a class="mua-ve" href="them-chuyen-bay.html">
-            	<div class="tab">Thêm chuyến bay</div>
+        	<a class="mua-ve">
+            	<div class="tab" ng-click="themChuyenBay()">Thêm chuyến bay</div>
             </a> 
-            <a class="mua-ve" href="admin-chinh-sua-cb.html">
-            	<div class="tab">Chỉnh sửa chuyến bay</div>
+            <a class="mua-ve" >
+            	<div class="tab" ng-click="chinhSuaChuyenBay()">Chỉnh sửa chuyến bay</div>
             </a> 
-            <a class="mua-ve" href="admin-xem-dat-ve.html">
+            <a class="mua-ve" >
             	<div class="tab-chosen">Tình trạng đặt vé</div>
             </a>
         </div>
@@ -59,11 +59,7 @@
                 </tr>
             </table>
             
-            </div>         
-
-            <div class="tab-1">
-            	<button type="button" class="btn-tim-kiem" ng-click="chonChuyenBay()">Tiếp tục</button>
-        	</div>                            
+            </div>                                 
         </div>	          
     </div>
 </div>

@@ -4,14 +4,14 @@
 	<div class="main" ng-controller="chonChuyenBayCtrl">
     <div style="background-color:#FFF">
         <div class="head-tab">
-        	<a class="mua-ve" href="them-chuyen-bay.html">
-            	<div class="tab">Thêm chuyến bay</div>
+        	<a class="mua-ve" >
+            	<div class="tab" ng-click="themChuyenBay()">Thêm chuyến bay</div>
             </a> 
-            <a class="mua-ve" href="admin-chinh-sua-cb.html">
+            <a class="mua-ve" >
             	<div class="tab-chosen">Chỉnh sửa chuyến bay</div>
             </a>
-            <a class="mua-ve" href="admin-xem-dat-ve.html">
-            	<div class="tab">Tình trạng đặt vé</div>
+            <a class="mua-ve" >
+            	<div class="tab" ng-click="xemTinhTrangDatVe()">Tình trạng đặt vé</div>
             </a>
         </div>
         <hr>
@@ -45,33 +45,33 @@
                 </tr>
                 <tr class="rowtb" ng-repeat="flight in flights"  ng-class="{selected: flight._hang === idSelectedHang}">                      
                     <td>
-                    	<label for="MyField">AB236</label>       
+                    	<label for="MyField">{{flight._ma}}</label>       
                     </td>
                     <td>
-                        <label for="MyField">Hà Nội</label>       
+                        <label for="MyField">{{flight._noiDi}}</label>       
                     </td>
                     <td>
-                        <label for="MyField">{noi den{</label>       
+                        <label for="MyField">{{flight._noiDen}}</label>       
                     </td>
                     <td>
-                        <label for="MyField">10-10-2016</label>       
+                        <label for="MyField">{{flight._ngayDi}}</label>       
                     </td>
                     <td>
-                    	<label for="MyField">14:15</label>
+                    	<label for="MyField">{{flight._gioDi}}</label>
                     </td>
                     <td>
-                    	<label for="MyField">E1</label>
+                    	<label for="MyField">{{flight._hang}}</label>
                     </td>
                     <td>
-                    	<label for="MyField">2000000</label>
+                    	<label for="MyField">{{flight._giaVe}}</label>
                     </td>
                     <td>
-                    	<label for="MyField">100</label>
+                    	<label for="MyField">{{flight._soGhe}}</label>
                     </td>
                     <td>
-                         <button type="button" name="chuyenBayE" ng-model="flight.selectedE" ng-value="flight" ng-click="setSelected(flight)"
+                         <button type="button" name="chuyenBayE" ng-model="flight.selectedE" ng-value="flight" ng-click="Edit(flight)"
                       style="width: 50px" ng-checked="checked"> Edit </button>
-                      <button type="button" name="chuyenBayD" ng-model="flight.selectedD" ng-value="flight" ng-click="setSelected(flight)"
+                      <button type="button" name="chuyenBayD" ng-model="flight.selectedE" ng-value="flight" ng-click="Delete(flight)"
                       style="width: 50px" ng-checked="checked"> Delete </button>
                     </td>
                 </tr>

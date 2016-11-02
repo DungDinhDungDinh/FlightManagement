@@ -59,4 +59,6 @@ myapp.service('Data', function() {
     this.khuHoi = false;
     this.selectedFlight = {};
     this.selectedBackFlight = {};
+    this.token;
+    this.flight = {};
 });

@@ -28,7 +28,7 @@ myapp.controller('thongTinChuyenBay1Ctrl',  ['$scope', '$http', 'Data', '$locati
     $scope.laySanBayDi = function() {
          $http({
                 method: 'GET',
-                url: '/api/start_airports',
+                url: '/api/start_airports'
             }).then(function successCallback(response) {
                 var airports = response.data;
                     
