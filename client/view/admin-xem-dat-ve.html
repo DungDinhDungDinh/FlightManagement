@@ -1,16 +1,16 @@
 ﻿
 <div>
-	<div class="main" ng-controller="chonChuyenBayCtrl">
+    <div class="main">
     <div style="background-color:#FFF">
         <div class="head-tab">
-        	<a class="mua-ve">
-            	<div class="tab" ng-click="themChuyenBay()">Thêm chuyến bay</div>
+            <a class="mua-ve" >
+                <div class="tab" ng-click="themChuyenBay()">Thêm chuyến bay</div>
             </a> 
             <a class="mua-ve" >
-            	<div class="tab" ng-click="chinhSuaChuyenBay()">Chỉnh sửa chuyến bay</div>
-            </a> 
+                <div class="tab">Chỉnh sửa chuyến bay</div>
+            </a>
             <a class="mua-ve" >
-            	<div class="tab-chosen">Tình trạng đặt vé</div>
+                <div class="tab-chosen" ng-click="xemTinhTrangDatVe()">Tình trạng đặt vé</div>
             </a>
         </div>
         <hr>
@@ -20,46 +20,35 @@
       
         <div class="center-tab" style="font-family:Arial, Verdana, sans-serif;">
 
-        	<h3 class="pleft3"> Tình trạng đặt vé </h3>
+            <h3 class="pleft3"> Tình trạng đặt vé </h3>
             
             <table >
-            	<col width="120">
-  				<col width="150">
-                <col width="150">
-                <col width="150">
                 <col width="120">
-  				<col width="120">
+                <col width="300">
+                <col width="150">
                 <tr>              
-                    <th>Mã CB</th>
-                    <th>Ngày đi</th>
-                    <th>Hạng</th>
-                    <th>Giá vé</th>
-                    <th>Số ghế</th>
-                    <th>Số ghế đã đặt</th>
+                    <th>Mã đặt chỗ</th>
+                    <th>Thời gian đặt chỗ</th>
+                    <th>Tổng tiền</th>
+                     <th>Trạng thái</th>
                 </tr>
                 <tr class="rowtb" ng-repeat="flight in flights"  ng-class="{selected: flight._hang === idSelectedHang}">                      
                     <td>
-                    	<label for="MyField">AB236</label>       
+                        <label for="MyField">{{flight._maDatCho}}</label>       
                     </td>
                     <td>
-                        <label for="MyField">10-10-2016</label>       
+                        <label for="MyField">{{flight._thoiGianDatCho}}</label>       
                     </td>
                     <td>
-                    	<label for="MyField">E1</label>
+                        <label for="MyField">{{flight._tongTien}}</label>
                     </td>
                     <td>
-                    	<label for="MyField">2000000</label>
-                    </td>
-                    <td>
-                    	<label for="MyField">100</label>
-                    </td>
-                    <td>
-                    	<label for="MyField">25</label>
+                        <label for="MyField">1</label>
                     </td>
                 </tr>
             </table>
             
-            </div>                                 
-        </div>	          
+            </div>                                   
+        </div>            
     </div>
 </div>
